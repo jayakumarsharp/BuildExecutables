@@ -1,0 +1,130 @@
+﻿@using System.Web.Optimization;
+@Scripts.Render("~/bundles/defaultscripts")
+<script src="~/Lib/moment-with-locales.min.js"></script>
+@Scripts.Render("~/bundles/customscripts")
+<!doctype html>
+<html style="height: auto; min-height: 100%;">
+<head>
+    <base href="/Trinity/">
+    <meta charset="utf-8" />
+    <title> BRD Fountain</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <!-- Bootstrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600|Open+Sans:400,600|Oswald" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/toaster.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/bower_components/Ionicons/css/ionicons.min.css">
+</head>
+<body ng-app="reportApp" ng-controller="MainController">
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-3 left-sidebar sidebar">
+                <div class="row">
+                    <div class="logo">
+                        <h3>BRD Fountain</h3>
+                    </div>
+                    <div class="user-panel">
+                        <div class="image">
+                            <img src="~/images/user.jpg" class="rounded-circle" alt="User Image">
+                            <a href="#" class="img-set dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/images/img-set.png">
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a ng-click="clearlogout()" href="@Url.Action("Logout", "Home")">Sign out</a></li>
+                            </ul>
+                        </div>
+                        <div class="info">
+                            <p>@Convert.ToString(Session["UserName"]) </p>
+
+                        </div>
+                    </div>
+                    <div class="menu-main">
+                        <ul class="sidebar-menu" data-widget="tree">
+                            <li ng-repeat="menu in MenuList" ng-class="{'active': rootname == menu.Path }"><a href="Main/{{menu.Path}}" ng-click="updatemenuclick(menu.Path)"> <span class="icon"><i class="{{menu.Icon}} "></i></span> {{menu.MenuName}}</a></li>
+                            @*<li ng-class="{'active': rootname == 'MappingMaster' }"><a href="MappingMaster" ng-click="updatemenuclick('MappingMaster')"> <span class="icon"><i class="fa fa-star-o"></i></span> Mapping Page</a></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                @RenderBody();
+            </div>
+        </div>
+        @*<footer class="main-footer">
+                <div class="container">
+                    <div class="pull-right hidden-xs">
+                        <b>Version</b> 1.0.0
+                    </div>
+                    <strong>Copyright &copy; 2017 COBA</strong> All rights reserved.
+                </div>
+            </footer>*@
+    </div>
+
+    <div id="loader" class="animationload hide">
+        <div class="loader">
+            Loading...
+        </div>
+    </div>
+    @*<script src="~/Assert/angular-animate.min.js"></script>
+        <script src="~/Assert/toaster.js"></script>
+        <script type="text/javascript" src="~/plugins/ng-file-upload/dist/ng-file-upload.min.js"></script>
+        <script type="text/javascript" src="~/plugins/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>*@
+
+    <style>
+        i.active, .inactive {
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        i.active, .inactive {
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        i.active {
+            color: #5cb85c;
+        }
+
+        i.inactive {
+            color: #d9534f;
+        }
+
+        .animationload {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: 999999;
+        }
+
+            .animationload .loader {
+                width: 200px;
+                height: 200px;
+                font-size: 0;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                background-image: url("images/loader.gif");
+                background-repeat: no-repeat;
+                background-position: center;
+                margin: -100px 0 0 -100px;
+            }
+    </style>
+    <script>
+        $('.sidebar').css("height", $(document).height());
+    </script>
+</body>
+
+@RenderSection("scripts", required: false);
+@RenderSection("styles", required: false);
+</html>

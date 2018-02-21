@@ -1,0 +1,69 @@
+﻿@*<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c8dbc;color:white">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-ng-click="delete()">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;" ng-show="!showaction">
+    <div class="box-header with-border">
+        <h4>      Application Master Management    </h4>
+    </div>
+    <div ng-controller="ApplicationMasterController" class="nav-tabs-custom">
+
+        <div ng-include="'Main/ConfirmModal'"></div>
+        <div ng-show="!IsReadOnly" class="row pull-right">
+            <button ng-show="!showAddwindow" data-ng-click="Showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+        </div>
+
+        <div ng-show="showAddwindow" class="sec-one">
+            <div class="col-md-6 col-md-offset-2 row">
+
+                <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
+
+
+                    <div class="col-md-6 form-group" style="position: static;">
+                        <label for="input-text-1">Application Id</label>
+
+                        <input type="text" class="form-control" id="input-id-1" placeholder="Application Id" ng-model=ApplicationMaster.ApplicationId>
+                    </div>
+                    <div class="col-md-6 form-group" style="position: static;">
+                        <label for="input-text-1">ApplicationName</label>
+
+                        <input type="text" class="form-control" id="input-id-1" placeholder="Application Name" ng-model=ApplicationMaster.ApplicationName>
+                    </div>
+
+                    <button title="Update Task" data-ng-show="editMode" data-ng-click="UpdateApplicationMaster(ApplicationMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button><!--<i class="fa fa-plus" style="color:white"></i>-->
+                    <button title="Add new task" data-ng-hide="editMode" data-ng-click="add(ApplicationMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
+                    <button title="Clear Task name field" data-ng-click="Confirmcancel()" class="col-md-2 btn btn-primary cancel">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+        <div ng-show="!showAddwindow" class="col-md-12 data-table" style="width:70%;margin-left:14%;">
+            <table class="table table-responsive" datatable="" dt-options="dtOptions" dt-columns="dtColumns"></table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

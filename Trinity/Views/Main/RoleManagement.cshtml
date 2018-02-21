@@ -1,0 +1,194 @@
+﻿<div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;">
+    <div ng-controller="RoleController" class="nav-tabs-custom">
+        <div class="box-header with-border">
+            <h4> Manage Role   </h4>
+        </div>
+        <div class="row pull-right"  style="margin-right:14%;">
+            <button ng-show="!IsReadOnly" data-ng-click="showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+        </div>
+        <div class="col-md-12 data-table" style="width:70%;margin-left:14%;">
+            <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-responsive"></table>
+
+            @*<div class="table-responsive">
+                    <table class="table no-margin table-striped">
+                        <thead style="background-color :#5b9bd5;color: #fff;">
+                            <tr>
+                                <th style="border-right :1px solid #9bc2e6;">Role Name</th>
+                                <th style="border-right :1px solid #9bc2e6;">Access Rights</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="role in Roles" ng-class="$index % 2 == 0 ? 'even' : 'odd'">
+                                <td>
+                                    <p style="margin:0px;">{{ role.RoleName }}</p>
+                                </td>
+                                <td>
+                                    <p style="margin:0px;">
+                                        <a data-ng-click="ViewRole(role.id)" name="viewRole" href="javascript:;">View</a>                                                    <span ng-show="!IsReadOnly"> | </span>
+                                        <a ng-show="!IsReadOnly" name="editRole" data-ng-click="EditRole(role)" href="javascript:;">Edit</a>
+                                        <span ng-show="!IsReadOnly"> | </span>
+                                        <a ng-show="!IsReadOnly" name="deleteRole" data-ng-click="showconfirm(role)" href="javascript:;">Delete</a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>*@
+
+        </div>
+
+        <div class="modal fade" id="AddEditRole" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="align-self:center;width:70%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel" ng-hide="editMode">Add Role</h4>
+                        <h4 class="modal-title" id="myModalLabel" ng-show="editMode">Edit Role</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form novalidate class="form-horizontal" role="form" name="addroleform">
+                            <div class="form-group">
+                                <label for="RoleID" class="col-sm-2 control-label">Role Name:</label>
+                                <div class="col-sm-10" style="margin-top:6px">
+                                    <input data-ng-hide="editMode" type="text" ng-model="role.selectedRole" title="Select Role" name="selectedRole" ng-required="!editMode" />
+                                    <input data-ng-show="editMode" type="text" ng-model="role.RoleName" title="Select Role" name="roleName" disabled />
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-1">
+                                    <div class="list-group box-comments" id="list1" style="height:300px;overflow-x:auto">
+                                        <a href="javascript:;" class="list-group-item active">
+                                            Available Rights
+                                            <!--<input title="Toggle all" ng-click="toggleA()" ng-model="toggle" value="{{toggle}}" class="pull-right" type="checkbox">-->
+                                        </a>
+                                        <span ng-repeat="right in listA | orderBy:'right.RightID' track by right.RightID">
+                                            <a href="javascript:;" data-id="{{right.RightID}}" class="list-group-item">
+                                                {{right.RightName}}
+                                                <input id="{{right.RightID}}" ng-model="isCheckedA" ng-click="stateAChanged(isCheckedA, right.RightID)" name="selectedA[]" value="{{right.RightID}}" class="pull-right" type="checkbox" ng-true-value="true" ng-false-value="false">
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--/col-4-->
+                                <div class="col-md-1 v-center text-center">
+                                    <br /><br /><br />
+                                    <div class="btn-group-vertical">
+                                        <button class="btn btn-primary" style="min-width: 9px;padding :13px 4px;" ng-click="AlltoA()" id="btnAllA"><i class="fa fa-angle-double-left"></i></button>
+                                        <button class="btn btn-primary" style="min-width: 9px;padding :13px 4px;" ng-click="bToA()" id="btnA"><i class="fa fa-angle-left"></i></button>
+                                        <button class="btn btn-primary" style="min-width: 9px;padding :13px 4px;" ng-click="aToB()" id="btnB"><i class="fa fa-angle-right"></i></button>
+                                        <button class="btn btn-primary" style="min-width: 9px;padding :13px 4px;" ng-click="AlltoB()" id="btnAllB"><i class="fa fa-angle-double-right"></i></button>
+                                    </div>
+                                </div>
+                                <!--/col-2-->
+
+                                <div class="col-sm-4">
+                                    <div class="list-group box-comments" id="list2" style="height:300px;overflow-x:auto">
+                                        <a href="javascript:;" class="list-group-item active">
+                                            Selected Rights
+                                            <!--<input title="Toggle all" ng-click="toggleB()" ng-model="toggle" value="{{toggle}}" class="pull-right" type="checkbox">-->
+                                        </a>
+                                        <span ng-repeat="right in listB | orderBy:'right.RightID' track by right.RightID">
+                                            <a href="javascript:;" data-id="{{right.RightID}}" class="list-group-item">
+                                                {{right.RightName}}
+                                                <input id="{{right.RightID}}" ng-click="stateBChanged(isCheckedB, right.RightID)" ng-model="isCheckedB" name="selectedB[]" value="{{right.RightID}}" class="pull-right" type="checkbox" ng-true-value="true" ng-false-value="false">
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!---->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-6 col-sm-6">
+                                        <span data-ng-hide="editMode">
+                                            <input type="submit" value="Add" ng-disabled="addroleform.$invalid" name="roleAdd" data-ng-click="add(role)" class="btn btn-primary" />
+                                        </span>
+                                        <span data-ng-show="editMode">
+                                            <input type="submit" value="Update" data-ng-click="ModifyRoleRight(role)" name="roleEdit" class="btn btn-primary" />
+                                        </span>
+                                        <input type="button" value="Cancel" data-ng-click="cancel()" name="roleCancel" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ViewRole" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:35%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">{{rolename.roleName}}</h4>
+                    </div>
+                    <div class="modal-body" style="max-height: 300px; overflow-y: auto">
+                        <form class="form-horizontal" role="form" name="viewrole">
+                            <div class="form-group">
+                                <label for="Name" class="col-sm-4 control-label">Role:</label>
+                                <div class="col-sm-8" style="margin-top:6px">
+                                    {{rolename.roleName}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Access Rights" class="col-sm-4 control-label">Access Rights:</label>
+                                <div class="col-sm-8">
+                                    <ul ng-repeat="item in rightnames" style="margin-top:6px">
+                                        <li>{{item.rightName}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" name="closeRoleView" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #3c8dbc;color:white">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-ng-click="delete()">Ok</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="roleChange" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:35%; margin:0 auto;">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #3c8dbc;color:white">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Confirm Change</h4>
+                    </div>
+                    <br />
+                    <div class="modal-body">
+                        You will be logged out once you confirm the change. Click 'Yes' to proceed.
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="float:right" data-ng-click="ModifySelfUser(role)">Yes</button>
+                        <button type="button" class="btn btn-primary" style="float:right" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

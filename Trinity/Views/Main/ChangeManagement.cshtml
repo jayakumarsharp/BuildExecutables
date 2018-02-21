@@ -1,0 +1,165 @@
+﻿<!-- BEGIN PAGE BREADCRUMBS -->
+<div ng-controller="ChangeManagementController">
+    <div ng-include="'Main/ConfirmModal'"></div>
+    <div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;" ng-show="!showaction">
+        <h4>     Change  Management</h4>
+
+        <section class="content">
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label>Strategy RefNumber</label>
+                    <select class="form-control" style="width:30%;" ng-model="RefNumber" ng-change="GetVersions(RefNumber)" title="Select Role" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Version-</option>
+                        <option ng-repeat="x in Strategydata" value="{{x.RefNumber}}">{{x.RefNumber}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 data-table">
+                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-responsive"></table>
+
+            </div>
+        </section>
+        <div ng-include="'ViewApprovals'"></div>
+    </div>
+    <div ng-show="showaction">
+        <div class="col-lg-8 col-md-6 main-content basic-page sidebar">
+            <h4>Edit Model/Algo Details</h4>
+            <div class="row">
+                <div class="box-body" ng-show="pageList[3].Page">
+                    <div class="col-md-6">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Details of changes performed</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.DetailsOfChanges" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Date change Initiated</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.DateChangeInitiated" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Attribute 1</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.Attribute1" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Attribute 3</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.Attribute3" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Business Impact</label>
+                                <input data-ng-show="editMode" class="form-control" numberdotonly type="text" maxlength="50" ng-model="ecurrency.ClientNumber" />
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.BusinessImpact" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date change implemented</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.DateChangeImplemented" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Attribute 2</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.Attribute2" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Attribute 4</label>
+                                <input data-ng-hide="editMode" class="form-control" type="text" numberdotonly maxlength="50" ng-model="currency.Attribute4" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Supporting Documents</label>
+                        <div class="col-sm-6" style="margin-top:6px">
+                            <input type="file" class="btn btn-sm btn-info btn-rounded" ngf-select ng-model="file" multiple name="file" />
+                            <i ng-show="upload_form.file.$error.required">*required</i><br>
+                            <i ng-show="upload_form.file.$error.maxSize">
+                                File too large
+                                {{file.size / 1000000|number:1}}MB: max 20M
+                            </i>
+                            <p>{{progress}}</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="button" value="Upload" data-ng-click="upload()" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                  
+                    <div class="form-group col-lg-12">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          
+                            <span>
+                                <input type="button" value="Next" ng-disabled="form2.$invalid" ng-click="activateTab(0)" class="btn btn-primary" />
+                            </span>&nbsp;
+
+                            <input type="button" value="Cancel" ng-click="Confirmcancel()" class="btn btn-primary cancel" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ng-include="'ShowApplicationDetails'"></div>
+                <div class="row">
+
+                    @*<div class="form-group col-lg-12">
+                            <div class="col-sm-offset-4 col-sm-10">
+                                <span>
+                                    <input type="button" value="Update" ng-click="UpdateChange(currency)" class="btn btn-outline-info" />
+                                </span>&nbsp;
+                                <span>
+                                    <input type="button" value="Add New Version" ng-click="SaveNewversionStrategy(currency)" class="btn btn-outline-info" />
+                                </span>&nbsp;
+                                <input type="button" value="Cancel" data-ng-click="cancel()" class="btn  btn-circle btn-default btn-outline-info" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-6 col-sm-offset-2 control-label label-danger" ng-show="errorinfo.length > 0">{{errorinfo}}</label>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3 right-sidebar sidebar">
+            <ol>
+                <li class="active-ol  done-act">
+                    <a ng-click="activateTab(3)">Change Details</a>
+                </li>
+                <li class="active-ol  done-act">
+                    <a ng-click="activateTab(0)">Basic Details</a>
+                </li>
+
+                <li class="active-ol">
+                    <a ng-click="activateTab(1)">Additional DETAILS</a>
+                </li>
+                <li>
+                    <a ng-click="activateTab(2)">Approver List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:25%">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c8dbc;color:white">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+            </div>
+            <br />
+            <div class="modal-body">
+                Are you sure you want to delete?
+            </div>
+            <br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-info" data-ng-click="delete()">Yes</button>
+                <button type="button" class="btn btn-sm btn-circle btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .disabled {
+        cursor: not-allowed;
+    }
+</style>

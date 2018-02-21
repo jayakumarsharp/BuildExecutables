@@ -1,0 +1,179 @@
+﻿<!-- BEGIN PAGE BREADCRUMBS -->
+<div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;" ng-show="!showaction">
+    <div ng-controller="ApprovalsController">
+        <ul class="nav nav-tabs">
+            <li class="active"><a ng-click="activatetab(1)" data-toggle="tab" aria-expanded="false"><strong>My Approvals</strong> </a></li>
+            <li class=""><a ng-click="activatetab(2)" data-toggle="tab" aria-expanded="true"><strong> Delegate Request</strong> </a></li>
+            <li class=""><a ng-click="activatetab(3)" data-toggle="tab" aria-expanded="true"><strong> Delegate Approvals Status</strong> </a></li>
+        </ul>
+        <div>
+            <div class="tab-pane" ng-if="tab1">
+
+                <div class="page_status">
+                    <a ng-click="GetAlldata('Pending')" style="margin: 0 -5px;">
+                        <div class="status_pending" ng-class="{'active':showMyApproval }">
+                            <div class="number">
+                                {{PendingGriddata.length}}
+                            </div>
+                            <div class="status_txt">
+                                Pending<br>
+                                Approvals
+                            </div>
+                        </div>
+                    </a>
+                    <a ng-click="GetAlldata('Completed')">
+                        <div class="status_completed" ng-class="{'active':!showMyApproval }">
+                            <div class="number">
+                                {{CompletedGriddata.length}}
+                            </div>
+                            <div class="status_txt">
+                                Completed<br>
+                                Approvals
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ng-show="showMyApproval">
+                        <table datatable="" dt-options="dtOptionspendingAppproval" dt-columns="dtColumnsPendingAppproval" class="table table-responsive" style="width:100%!important"></table>
+                    </div>
+
+                    <div class="col-md-12" ng-show="!showMyApproval">
+                        <table datatable="" dt-options="dtOptionscompleteAppproval" dt-columns="dtColumnsCompleteAppproval" class="table table-responsive" style="width:100%!important"></table>
+                    </div>
+
+
+                    <div class="modal fade" id="LayoutModel1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+                        <div class="modal-dialog" style="width:75%">
+                            <div class="modal-content">
+                                <div class="modal-header content-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel" style="margin-left:40%;">Approval Status</h4>
+                                </div>
+                                <div class="row">
+                                    <div ng-include="'ShowApprovalDetails'"></div>
+                                    <div class="form-group col-lg-12">
+                                        <div class="col-sm-offset-5 col-sm-10">
+                                            &nbsp;
+                                            <span>
+                                                <input type="button" value="Update" ng-click="UpdateStrategyApprover(currency)" class="btn  btn-primary" />
+                                            </span>&nbsp;
+                                            <input type="button" value="Cancel" ng-click="cancel()" class="btn  btn-circle btn-default btn-outline-info" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-6 col-sm-offset-2 control-label label-danger" ng-show="errorinfo.length > 0">{{errorinfo}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" ng-if="tab2">
+
+                <div class="page_status">
+                    <a ng-click="GetDelegatedApprovalAlldata('Pending')" style="margin: 0 -5px;">
+                        <div class="status_pending" ng-class="{'active':showMyDelegateApproved }">
+                            <div class="number">
+                                {{DelegatedPendingGriddata.length}}
+                            </div>
+                            <div class="status_txt">
+                                Pending<br>
+                                Approvals
+                            </div>
+                        </div>
+                    </a>
+                    <a ng-click="GetDelegatedApprovalAlldata('Completed')">
+                        <div class="status_completed" ng-class="{'active':!showMyDelegateApproved }">
+                            <div class="number">
+                                {{DelegatedCompletedGriddata.length}}
+                            </div>
+                            <div class="status_txt">
+                                Completed<br>
+                                Approvals
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" ng-show="showMyDelegateApproved">
+                        <table datatable="" dt-options="dtOptionspendingDelegates" dt-columns="dtColumnsPendingDelegates" class="table table-responsive" style="width:100%!important"></table>
+                    </div>
+
+                    <div class="col-md-12" ng-show="!showMyDelegateApproved">
+                        <table datatable="" dt-options="dtOptionscompleteDelegates" dt-columns="dtColumnsCompleteDelegates" class="table table-responsive" style="width:100%!important"></table>
+                    </div>
+
+
+                    <div class="modal fade" id="LayoutModel1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+                        <div class="modal-dialog" style="width:75%">
+                            <div class="modal-content">
+                                <div class="modal-header content-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel" style="margin-left:40%;">Approval Status</h4>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div ng-include="'ShowApprovalDetails'"></div>
+                                                    <div class="form-group col-lg-12">
+                                                        <div class="col-sm-offset-5 col-sm-10">
+                                                            &nbsp;
+                                                            <span>
+                                                                <input type="button" value="Update" ng-click="UpdatecurrencyConversion(currency)" class="btn  btn-circle btn-default btn-outline-info" />
+                                                            </span>&nbsp;
+                                                            <input type="button" value="Cancel" ng-click="cancel()" class="btn  btn-circle btn-default btn-outline-info" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-sm-offset-2 control-label label-danger" ng-show="errorinfo.length > 0">{{errorinfo}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-pane -->
+            <!-- /.tab-pane -->
+            <div class="tab-pane" ng-if="tab3">
+                <div class="row m-t-xs">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h4>Pending Accepts</h4>
+                            </div>
+                            <form role="form">
+                                <table datatable="" dt-options="dtOptionsDelegateRequestAppproval" dt-columns="dtColumnsDelegateRequestAppproval" class="table table-responsive" style="width:100%!important"></table>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    @*<div class="col-md-6">
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h4>Completed Accepts</h4>
+                                </div>
+                                <form role="form">
+                                    <div id="grid1" ui-grid="DelegatedCompletedGrid" ui-grid-pagination class="grid"></div>
+                                </form>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

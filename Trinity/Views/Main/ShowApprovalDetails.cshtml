@@ -1,0 +1,43 @@
+﻿<div ng-show="notificationExist">
+    <div class="col-md-12">
+        <form>
+            <div class="form-group">
+                <label for="SBU" class="col-sm-3 control-label"></label>
+                <div class="col-sm-12" style="margin-top:6px">
+
+                    <div class="col-sm-8 col-sm-offset-2 ">
+
+                        @*<div class="checkbox">
+                            <label class="mt-checkbox mt-checkbox-outline ">
+                                SIGN OFF&nbsp;&nbsp;
+                            </label>
+                            <label>
+                                <input type="checkbox" ng-model="currency.Status">
+                                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                            </label>
+                        </div>*@
+
+                        <label style="display :inline-flex;">
+                                <input type="radio" name="status" class="radio" value="Y" ng-model="currency.Status">
+                                &nbsp;   Sign Off
+                            </label>
+                            &nbsp;
+                            <label style="display :inline-flex;">
+                                <input type="radio" name="status" class="radio" value="N" ng-model="currency.Status">
+                                &nbsp;   Reject
+                            </label>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-sm-8 col-sm-offset-2 ">
+                    <label>Comments</label>
+                    <textarea class="form-control" type="text" numberdotonly maxlength="4000" style="height:50px;" ng-model="currency.Comments" required> </textarea>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

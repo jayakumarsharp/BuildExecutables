@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "LoginDisplay";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@Html.Hidden("RedirectToHome", Url.Action("Index", "Home", new { Page = @Request.QueryString["Page"] }))
+<div ng-app="LoginApp" ng-controller="LoginController" class="container">
+    <div class="login-logo">
+        <h1>BRD Fountain</h1>
+    </div>
+    <div id="signin-form">
+      
+        <h3>SIGN-IN</h3>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "login-form", data_async = "", data_target = "#rating-modal" }))
+        {
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input class="form-control" type="text" autocomplete="off" placeholder="Username" name="username" />
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input class="form-control" type="password" autocomplete="off" placeholder="Password" name="password" />
+            </div>
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Forgot Password?</button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            <div style="color :red;text-align:center;background :bisque;margin :15px;padding :3px;" ng-if="errorMessage">{{ errorMessage }}</div>
+        }
+    </div>
+</div>
+<script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/Lib/angular.min.js"></script>
+<script src="~/Assert/angular-animate.min.js"></script>
+<script src="~/plugins/iCheck/icheck.min.js"></script>
+<script src="~/js/animate.js"></script>
+<script src="~/js/loginApp.js"></script>
+
+<style>
+    .login-logo h1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #d2d6de;
+        text-align: center;
+        margin: 40px 0 60px 0;
+    }
+
+    #signin-form {
+        max-width: 350px;
+        margin: 0 auto 0;
+        padding: 10px 0;
+        background: #ffffff;
+    }
+
+        #signin-form h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #212121;
+            text-align: center;
+        }
+    /*.login-box, .register-box {
+        margin-top: 3% !important;
+        margin-bottom: 1% !important;
+    }*/
+    .login-page, .register-page {
+        background: url('images/bg.jpg') repeat -440px -360px;
+        ;
+    }
+    /*body {
+        height: 95%;
+    }*/
+    .login-form {
+        padding-bottom: 12px;
+    }
+
+    .input-group-addon {
+        border-radius: 0;
+        background-color: #fff;
+    }
+
+    .input-group {
+        padding: 12px 20px;
+    }
+
+    .form-control {
+        border-radius: 0;
+    }
+
+    .row {
+        padding: 6px 0 12px 0;
+    }
+
+    .col-lg-6 {
+        padding-left: 45px;
+    }
+
+    .btn {
+        border-radius: 0;
+    }
+
+    .btn-block {
+        width: 30%;
+        margin: 6px 0 0 35%;
+    }
+
+    .btn-link {
+        padding: 5px;
+    }
+</style>    

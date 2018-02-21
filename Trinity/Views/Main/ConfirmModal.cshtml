@@ -1,0 +1,44 @@
+﻿<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="align-self:center;">
+
+        <div class="modal-content" style="padding-top:45px;">
+
+            <section class="dashboard-counts no-padding-bottom">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-12 col-sm-12" style="margin-bottom:10px;">
+                            <div class="card">
+                                <form class="form-horizontal">
+
+                                    <div class="card-header align-items-center">
+                                        <h4 class="h4">
+                                            Confirm Action
+                                            <button type="button" class="close" data-dismiss="modal" style="float:right;">&times;</button>
+                                        </h4>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="title">
+                                            <h6> Are you sure want to cancel?</h6>
+                                            @*<h5>{{deleteItem | uppercase}}</h5>*@
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <div style="float:right;">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-primary cancel">Cancel</button>
+                                                    <button type="submit" ng-click="cancel()" class="btn btn-primary">Yes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
