@@ -5,7 +5,7 @@
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('ApplicationCategory').withTitle('ApplicationCategory'),
+        DTColumnBuilder.newColumn('ApplicationCategory').withTitle('Application Category'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];

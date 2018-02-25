@@ -1,11 +1,11 @@
-﻿ReportApp.controller('FTAStrategyOwnerMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
+﻿ReportApp.controller('LTAStrategyOwnerMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.dtOptions = DTOptionsBuilder.fromSource()
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAStrategyOwner').withTitle('FTAStrategyOwner'),
+        DTColumnBuilder.newColumn('LTAStrategyOwner').withTitle('LTA Strategy Owner'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -18,7 +18,7 @@
 
     function actionsHtml(data, type, full, meta) {
         $scope.data = data;
-        return '<a  ng-click="GetFTAStrategyOwnerMasterById(' + data + ')"><img src="images/edit.png"></a> ';
+        return '<a  ng-click="GetLTAStrategyOwnerMasterById(' + data + ')"><img src="images/edit.png"></a> ';
         //+'<button class="btn btn-danger" ng-click="delete(' + data + ')" )"="">' +
         //'   <i class="fa fa-trash-o"></i>' +
         //'</button>';
@@ -31,8 +31,8 @@
     }
 
 
-    $scope.GetAllFTAStrategyOwnerMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAStrategyOwner?FTAStrategyOwnerId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAStrategyOwnerMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAStrategyOwner?LTAStrategyOwnerId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
         }).error(function (error) {
@@ -41,53 +41,53 @@
     };
 
 
-    $scope.add = function (FTAStrategyOwnerMaster) {
-        if (FTAStrategyOwnerMaster != null) {
-            if (FTAStrategyOwnerMaster.FTAStrategyOwner.trim() != "") {
-                ApiCall.MakeApiCall("AddFTAStrategyOwner", 'POST', FTAStrategyOwnerMaster).success(function (data) {
+    $scope.add = function (LTAStrategyOwnerMaster) {
+        if (LTAStrategyOwnerMaster != null) {
+            if (LTAStrategyOwnerMaster.LTAStrategyOwner.trim() != "") {
+                ApiCall.MakeApiCall("AddLTAStrategyOwner", 'POST', LTAStrategyOwnerMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
-                        $scope.FTAStrategyOwnerMaster = null;
-                        $scope.GetAllFTAStrategyOwnerMaster();
+                        $scope.LTAStrategyOwnerMaster = null;
+                        $scope.GetAllLTAStrategyOwnerMaster();
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'FTAStrategyOwner added successfully', null);
+                        toaster.pop('success', "Success", 'LTA Strategy Owner added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAStrategyOwner ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Strategy Owner ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAStrategyOwner', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Strategy Owner', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAStrategyOwner', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Strategy Owner', null);
         }
 
     };
 
-    $scope.GetFTAStrategyOwnerMasterById = function (FTAStrategyOwnerMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAStrategyOwner?FTAStrategyOwnerId=" + FTAStrategyOwnerMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAStrategyOwnerMasterById = function (LTAStrategyOwnerMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAStrategyOwner?LTAStrategyOwnerId=" + LTAStrategyOwnerMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAStrategyOwnerMaster = data[0];
+            $scope.LTAStrategyOwnerMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAStrategyOwner! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTA Strategy Owner! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function () {
-        ApiCall.MakeApiCall("DeleteFTAStrategyOwner?FTAStrategyOwnerId=" + $scope.FTAStrategyOwnerMasterId, 'GET', '').success(function (data) {
-            $scope.FTAStrategyOwnerMaster = null;
+        ApiCall.MakeApiCall("DeleteLTAStrategyOwner?LTAStrategyOwnerId=" + $scope.LTAStrategyOwnerMasterId, 'GET', '').success(function (data) {
+            $scope.LTAStrategyOwnerMaster = null;
             $scope.editMode = false;
-            $scope.GetAllFTAStrategyOwnerMaster();
+            $scope.GetAllLTAStrategyOwnerMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'FTAStrategyOwner deleted successfully', null);
+            toaster.pop('success', "Success", 'LTA Strategy Owner deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -97,37 +97,37 @@
         $('#confirmModal').modal('show');
     }
 
-    $scope.UpdateFTAStrategyOwnerMaster = function (model) {
+    $scope.UpdateLTAStrategyOwnerMaster = function (model) {
         if (model != null) {
-            if (model.FTAStrategyOwner.trim() != "") {
-                ApiCall.MakeApiCall("ModifyFTAStrategyOwner", 'POST', model).success(function (data) {
+            if (model.LTAStrategyOwner.trim() != "") {
+                ApiCall.MakeApiCall("ModifyLTAStrategyOwner", 'POST', model).success(function (data) {
                     $scope.editMode = false;
-                    $scope.FTAStrategyOwnerMaster = null;
-                    $scope.GetAllFTAStrategyOwnerMaster();
+                    $scope.LTAStrategyOwnerMaster = null;
+                    $scope.GetAllLTAStrategyOwnerMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'FTAStrategyOwnerMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'LTA Strategy Owner updated successfully', null);
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAStrategyOwnerMaster! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTAStrategyOwnerMaster! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAStrategyOwner', null);
+                toaster.pop('warning', "Warning", 'Please enter LTAStrategyOwner', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAStrategyOwner', null);
+            toaster.pop('warning', "Warning", 'Please enter LTAStrategyOwner', null);
         }
     };
 
 
 
     $scope.showconfirm = function (data) {
-        $scope.FTAStrategyOwnerMasterId = data;
+        $scope.LTAStrategyOwnerMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAStrategyOwnerMaster = null;
+        $scope.LTAStrategyOwnerMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -141,14 +141,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAStrategyOwner Write') {
+                        if (value.RightName == 'LTAStrategyOwner Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAStrategyOwnerMaster();
+                    $scope.GetAllLTAStrategyOwnerMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

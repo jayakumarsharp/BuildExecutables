@@ -2,12 +2,9 @@
 var ServionImages = '';
 var HostPath = '';
 var urltype = '';
-
 var ReportApp = angular.module('reportApp', ['ngFileUpload', 'toaster', 'datatables']);
-
 ReportApp.controller('MainController', ['$scope', '$rootScope', 'StrategyService', 'UserFactory', 'ApiCall', function ($scope, $rootScope, StrategyService, UserFactory, ApiCall) {
     $scope.rootname = 'Index';
-
     if (sessionStorage.getItem('menuname') != null) {
         var root = sessionStorage.getItem('menuname');
         $scope.rootname = root;
@@ -16,7 +13,6 @@ ReportApp.controller('MainController', ['$scope', '$rootScope', 'StrategyService
         sessionStorage.setItem('menuname', 'Index');
         $scope.rootname = 'Index';
     }
-
     $scope.notificationdata = [];
     $rootScope.UserInfo = {};
     $scope.MenuList = [];
@@ -26,7 +22,6 @@ ReportApp.controller('MainController', ['$scope', '$rootScope', 'StrategyService
         $scope.rootname = 'Index';
         // $scope.MenuName = 'Home';
     }
-
     $scope.updatemenuclick = function (path) {
         sessionStorage.setItem('menuname', path);
     }
@@ -72,7 +67,6 @@ ReportApp.directive('datetimepicker', function () {
             ngModel.$render = function () {
                 $(element).find('input').val(ngModel.$viewValue || '');
             }
-
             $(element).datetimepicker({
                 format: 'DD/MM/YYYY',
                 language: 'en',
@@ -80,18 +74,14 @@ ReportApp.directive('datetimepicker', function () {
                 defaultDate: scope.date
                 //currentdate
             });
-
             $(element).on('dp.change', function () {
                 scope.$apply(read);
             });
-
             read();
-
             function read() {
                 var value = element.find('input').val();
                 ngModel.$setViewValue(value);
             }
-
             $(element).on('keyup', function () {
                 scope.$apply(read);
             });
@@ -107,7 +97,6 @@ ReportApp.directive('datetimepicker', function () {
 ReportApp.factory('_', ['$window', function ($window) {
     return $window._; // assumes underscore has already been loaded on the page
 }]);
-
 
 
 ReportApp.directive('multiselect', function () {
@@ -281,13 +270,9 @@ ReportApp.directive('multiselect', function () {
     };
 });
 
-
-
-
 ReportApp.factory('reportFactory', ['$http', function ($http, $q) {
     var URL = 'Main/';
     var AuthFactory = {
-
         Logout: function (userId) {
             return $http.post('Home/Logout/', { userId: userId });
         },
@@ -299,10 +284,6 @@ ReportApp.factory('reportFactory', ['$http', function ($http, $q) {
         },
         GetUser: function (userId) {
             return $http.get(URL + 'GetUser?userId=' + userId);
-        },
-
-        AddReportApplicationMappings(postdata) {
-            return $http.post(URL + 'AddReportApplicationMappings', postdata);
         }
     };
     return AuthFactory;

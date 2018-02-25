@@ -1,4 +1,4 @@
-﻿ReportApp.controller('FTAStrategyMappingController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
+﻿ReportApp.controller('LTAStrategyMappingController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.editMode = false;
@@ -8,8 +8,8 @@
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAStrategyName').withTitle('FTAStrategy Name'),
-        DTColumnBuilder.newColumn('FTAStrategyCode').withTitle('FTAStrategy Code'),
+        DTColumnBuilder.newColumn('LTAStrategyName').withTitle('LTA Strategy Name'),
+        DTColumnBuilder.newColumn('LTAStrategyCode').withTitle('LTA Strategy Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -29,86 +29,86 @@
     }
 
 
-    $scope.GetAllFTAStrategyMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAStrategyMapping?FTAStrategyId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAStrategyMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAStrategyMapping?LTAStrategyId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
 
         }).error(function (error) {
             $scope.Error = error;
         })
-        ApiCall.MakeApiCall("GetAllFTAStrategyName?FTAStrategyNameId=", 'GET', '').success(function (data) {
-            $scope.FTAStrategyNameList = data;
+        ApiCall.MakeApiCall("GetAllLTAStrategyName?LTAStrategyNameId=", 'GET', '').success(function (data) {
+            $scope.LTAStrategyNameList = data;
         }).error(function (error) {
             $scope.Error = error;
         });
-        ApiCall.MakeApiCall("GetAllFTAStrategyCode?FTAStrategyCodeId=", 'GET', '').success(function (data) {
-            $scope.FTAStrategyCodeList = data;
+        ApiCall.MakeApiCall("GetAllLTAStrategyCode?LTAStrategyCodeId=", 'GET', '').success(function (data) {
+            $scope.LTAStrategyCodeList = data;
         }).error(function (error) {
             $scope.Error = error;
         })
     };
 
 
-    $scope.add = function (FTAStrategyMaster) {
-        if (FTAStrategyMaster != null) {
-            if (FTAStrategyMaster.FTAStrategyCode.FTAStrategyCode && FTAStrategyMaster.FTAStrategyName.FTAStrategyName) {
-                var input = { FTAStrategyCodeId: FTAStrategyMaster.FTAStrategyCode.Id, FTAStrategyNameId: FTAStrategyMaster.FTAStrategyName.Id };
+    $scope.add = function (LTAStrategyMaster) {
+        if (LTAStrategyMaster != null) {
+            if (LTAStrategyMaster.LTAStrategyCode.LTAStrategyCode && LTAStrategyMaster.LTAStrategyName.LTAStrategyName) {
+                var input = { LTAStrategyCodeId: LTAStrategyMaster.LTAStrategyCode.Id, LTAStrategyNameId: LTAStrategyMaster.LTAStrategyName.Id };
 
-                ApiCall.MakeApiCall("AddFTAStrategyMapping", 'POST', input).success(function (data) {
+                ApiCall.MakeApiCall("AddLTAStrategyMapping", 'POST', input).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
                         if (data == "success") {
-                            $scope.FTAStrategyMaster = null;
-                            $scope.GetAllFTAStrategyMaster();
+                            $scope.LTAStrategyMaster = null;
+                            $scope.GetAllLTAStrategyMaster();
                             $scope.editMode = false;
 
                             $scope.showAddwindow = false;
-                            toaster.pop('success', "Success", 'FTAStrategy added successfully', null);
+                            toaster.pop('success', "Success", 'LTA Strategy added successfully', null);
                         }
                         else
                             toaster.pop('warning', "Warning", data, null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAStrategy ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTAStrategy ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAStrategy', null);
+                toaster.pop('warning', "Warning", 'Please enter LTAStrategy', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAStrategy', null);
+            toaster.pop('warning', "Warning", 'Please enter LTAStrategy', null);
         }
 
     };
 
-    $scope.GetFTAStrategyMasterById = function (FTAStrategyMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAStrategy?FTAStrategyId=" + FTAStrategyMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAStrategyMasterById = function (LTAStrategyMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAStrategy?LTAStrategyId=" + LTAStrategyMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAStrategyMaster = data[0];
+            $scope.LTAStrategyMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAStrategy! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTAStrategy! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function (id) {
-        ApiCall.MakeApiCall("DeleteFTAStrategyMapping?Id=" + id, 'GET', '').success(function (data) {
+        ApiCall.MakeApiCall("DeleteLTAStrategyMapping?Id=" + id, 'GET', '').success(function (data) {
             if (data == "success") {
-                $scope.FTAStrategyMaster = null;
+                $scope.LTAStrategyMaster = null;
                 $scope.editMode = false;
-                $scope.GetAllFTAStrategyMaster();
+                $scope.GetAllLTAStrategyMaster();
                 $('#confirmModal').modal('hide');
                 $scope.showAddwindow = false;
-                toaster.pop('success', "Success", 'FTAStrategy deleted successfully', null);
+                toaster.pop('success', "Success", 'LTA Strategy deleted successfully', null);
             }
             else
                 toaster.pop('warning', "Warning", data, null);
         }).error(function (data) {
-            $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while deleting! " + data.ExceptionMessage;
         });
     };
 
@@ -116,37 +116,37 @@
         $('#confirmModal').modal('show');
     }
 
-    //$scope.UpdateFTAStrategyMaster = function (model) {
+    //$scope.UpdateLTAStrategyMaster = function (model) {
     //    if (model != null) {
-    //        if (model.FTAStrategy.trim() != "") {
-    //            ApiCall.MakeApiCall("ModifyFTAStrategy", 'POST', model).success(function (data) {
+    //        if (model.LTAStrategy.trim() != "") {
+    //            ApiCall.MakeApiCall("ModifyLTAStrategy", 'POST', model).success(function (data) {
     //                $scope.editMode = false;
-    //                $scope.FTAStrategyMaster = null;
-    //                $scope.GetAllFTAStrategyMaster();
+    //                $scope.LTAStrategyMaster = null;
+    //                $scope.GetAllLTAStrategyMaster();
     //                $scope.showAddwindow = false;
-    //                toaster.pop('success', "Success", 'FTAStrategyMaster updated successfully', null);
+    //                toaster.pop('success', "Success", 'LTAStrategyMaster updated successfully', null);
     //            }).error(function (data) {
-    //                $scope.error = "An Error has occured while Adding FTAStrategyMaster! " + data.ExceptionMessage;
+    //                $scope.error = "An Error has occured while Adding LTAStrategyMaster! " + data.ExceptionMessage;
     //            });
     //        }
     //        else {
-    //            toaster.pop('warning', "Warning", 'Please enter FTAStrategy', null);
+    //            toaster.pop('warning', "Warning", 'Please enter LTAStrategy', null);
     //        }
     //    }
     //    else {
-    //        toaster.pop('warning', "Warning", 'Please enter FTAStrategy', null);
+    //        toaster.pop('warning', "Warning", 'Please enter LTAStrategy', null);
     //    }
     //};
 
 
 
     $scope.showconfirm = function (data) {
-        $scope.FTAStrategyMasterId = data;
+        $scope.LTAStrategyMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAStrategyMaster = null;
+        $scope.LTAStrategyMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -160,14 +160,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAStrategy Write') {
+                        if (value.RightName == 'LTAStrategy Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAStrategyMaster();
+                    $scope.GetAllLTAStrategyMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

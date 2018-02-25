@@ -1,11 +1,11 @@
-﻿ReportApp.controller('FTAApplicationCodeMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
+﻿ReportApp.controller('LTAApplicationCodeMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.dtOptions = DTOptionsBuilder.fromSource()
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAApplicationCode').withTitle('FTAApplicationCode'),
+        DTColumnBuilder.newColumn('LTAApplicationCode').withTitle('LTA Application Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -18,7 +18,7 @@
 
     function actionsHtml(data, type, full, meta) {
         $scope.data = data;
-        return '<a  ng-click="GetFTAApplicationCodeMasterById(' + data + ')"><img src="images/edit.png"></a> ';
+        return '<a  ng-click="GetLTAApplicationCodeMasterById(' + data + ')"><img src="images/edit.png"></a> ';
         //+'<button class="btn btn-danger" ng-click="delete(' + data + ')" )"="">' +
         //'   <i class="fa fa-trash-o"></i>' +
         //'</button>';
@@ -31,8 +31,8 @@
     }
 
 
-    $scope.GetAllFTAApplicationCodeMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAApplicationCode?FTAApplicationCodeId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAApplicationCodeMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAApplicationCode?LTAApplicationCodeId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
         }).error(function (error) {
@@ -41,53 +41,53 @@
     };
 
 
-    $scope.add = function (FTAApplicationCodeMaster) {
-        if (FTAApplicationCodeMaster != null) {
-            if (FTAApplicationCodeMaster.FTAApplicationCode.trim() != "") {
-                ApiCall.MakeApiCall("AddFTAApplicationCode", 'POST', FTAApplicationCodeMaster).success(function (data) {
+    $scope.add = function (LTAApplicationCodeMaster) {
+        if (LTAApplicationCodeMaster != null) {
+            if (LTAApplicationCodeMaster.LTAApplicationCode.trim() != "") {
+                ApiCall.MakeApiCall("AddLTAApplicationCode", 'POST', LTAApplicationCodeMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
-                        $scope.FTAApplicationCodeMaster = null;
-                        $scope.GetAllFTAApplicationCodeMaster();
+                        $scope.LTAApplicationCodeMaster = null;
+                        $scope.GetAllLTAApplicationCodeMaster();
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'FTAApplicationCode added successfully', null);
+                        toaster.pop('success', "Success", 'LTA Application Code added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAApplicationCode ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Application Code  ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAApplicationCode', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Application Code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAApplicationCode', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Application Code', null);
         }
 
     };
 
-    $scope.GetFTAApplicationCodeMasterById = function (FTAApplicationCodeMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAApplicationCode?FTAApplicationCodeId=" + FTAApplicationCodeMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAApplicationCodeMasterById = function (LTAApplicationCodeMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAApplicationCode?LTAApplicationCodeId=" + LTAApplicationCodeMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAApplicationCodeMaster = data[0];
+            $scope.LTAApplicationCodeMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAApplicationCode! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTA Application Code! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function () {
-        ApiCall.MakeApiCall("DeleteFTAApplicationCode?FTAApplicationCodeId=" + $scope.FTAApplicationCodeMasterId, 'GET', '').success(function (data) {
-            $scope.FTAApplicationCodeMaster = null;
+        ApiCall.MakeApiCall("DeleteLTAApplicationCode?LTAApplicationCodeId=" + $scope.LTAApplicationCodeMasterId, 'GET', '').success(function (data) {
+            $scope.LTAApplicationCodeMaster = null;
             $scope.editMode = false;
-            $scope.GetAllFTAApplicationCodeMaster();
+            $scope.GetAllLTAApplicationCodeMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'FTAApplicationCode deleted successfully', null);
+            toaster.pop('success', "Success", 'LTA Application Code deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -97,37 +97,37 @@
         $('#confirmModal').modal('show');
     }
 
-    $scope.UpdateFTAApplicationCodeMaster = function (model) {
+    $scope.UpdateLTAApplicationCodeMaster = function (model) {
         if (model != null) {
-            if (model.FTAApplicationCode.trim() != "") {
-                ApiCall.MakeApiCall("ModifyFTAApplicationCode", 'POST', model).success(function (data) {
+            if (model.LTAApplicationCode.trim() != "") {
+                ApiCall.MakeApiCall("ModifyLTAApplicationCode", 'POST', model).success(function (data) {
                     $scope.editMode = false;
-                    $scope.FTAApplicationCodeMaster = null;
-                    $scope.GetAllFTAApplicationCodeMaster();
+                    $scope.LTAApplicationCodeMaster = null;
+                    $scope.GetAllLTAApplicationCodeMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'FTAApplicationCodeMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'LTA Application Code updated successfully', null);
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAApplicationCodeMaster! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Application Code ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAApplicationCode', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Application Code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAApplicationCode', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Application Code', null);
         }
     };
 
 
 
     $scope.showconfirm = function (data) {
-        $scope.FTAApplicationCodeMasterId = data;
+        $scope.LTAApplicationCodeMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAApplicationCodeMaster = null;
+        $scope.LTAApplicationCodeMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -141,14 +141,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAApplicationCode Write') {
+                        if (value.RightName == 'LTAApplicationCode Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAApplicationCodeMaster();
+                    $scope.GetAllLTAApplicationCodeMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

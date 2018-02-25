@@ -596,7 +596,7 @@ crop.factory('cropCanvas', [function() {
 crop.service('cropEXIF', [function() {
   var debug = false;
 
-  var ExifTags = this.Tags = {
+  var ExiLTAgs = this.Tags = {
 
       // version tags
       0x9000 : "ExifVersion",             // EXIF version
@@ -672,7 +672,7 @@ crop.service('cropEXIF', [function() {
       0xA420 : "ImageUniqueID"            // Identifier assigned uniquely to each image
   };
 
-  var TiffTags = this.TiffTags = {
+  var TifLTAgs = this.TifLTAgs = {
       0x0100 : "ImageWidth",
       0x0101 : "ImageHeight",
       0x8769 : "ExifIFDPointer",
@@ -1252,10 +1252,10 @@ crop.service('cropEXIF', [function() {
           return false;
       }
 
-      tags = readTags(file, tiffOffset, tiffOffset + firstIFDOffset, TiffTags, bigEnd);
+      tags = readTags(file, tiffOffset, tiffOffset + firstIFDOffset, TifLTAgs, bigEnd);
 
       if (tags.ExifIFDPointer) {
-          exifData = readTags(file, tiffOffset, tiffOffset + tags.ExifIFDPointer, ExifTags, bigEnd);
+          exifData = readTags(file, tiffOffset, tiffOffset + tags.ExifIFDPointer, ExiLTAgs, bigEnd);
           for (tag in exifData) {
               switch (tag) {
                   case "LightSource" :

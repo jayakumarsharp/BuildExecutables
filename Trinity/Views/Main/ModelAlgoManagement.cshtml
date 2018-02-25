@@ -2,10 +2,10 @@
 <div ng-controller="StrategyController">
     <div ng-include="'Main/ConfirmModal'"></div>
     <div class="col-lg-12 col-md-12  main-content basic-page sidebar" style="width:80%;padding:1px!important;" ng-show="!showaction">
-        <h4>Strategy Management   </h4>
+        <h4> LTA Strategy Inventory Management   </h4>
 
         <div class="row pull-right" ng-if="Permissions.IsWrite || ApprovalCheck.IsApprove">
-            <button data-ng-click="showadd()" class="btn btn-primary">Add Strategy &nbsp;    <i class="fa fa-plus"></i></button>
+            <button data-ng-click="showadd()" class="btn btn-primary">Add LTA Strategy Inventory &nbsp;    <i class="fa fa-plus"></i></button>
         </div>
         <div class="col-lg-12 data-table">
             <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-responsive"></table>

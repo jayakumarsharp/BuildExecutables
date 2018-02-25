@@ -1,11 +1,11 @@
-﻿ReportApp.controller('FTAApplicationNameMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
+﻿ReportApp.controller('LTAApplicationNameMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.dtOptions = DTOptionsBuilder.fromSource()
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAApplicationName').withTitle('FTAApplicationName'),
+        DTColumnBuilder.newColumn('LTAApplicationName').withTitle('LTA Application Name'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -14,7 +14,7 @@
     }
     function actionsHtml(data, type, full, meta) {
         $scope.data = data;
-        return '<a  ng-click="GetFTAApplicationNameMasterById(' + data + ')"><img src="images/edit.png"></a> ';
+        return '<a  ng-click="GetLTAApplicationNameMasterById(' + data + ')"><img src="images/edit.png"></a> ';
         //+'<button class="btn btn-danger" ng-click="delete(' + data + ')" )"="">' +
         //'   <i class="fa fa-trash-o"></i>' +
         //'</button>';
@@ -27,8 +27,8 @@
     }
 
 
-    $scope.GetAllFTAApplicationNameMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAApplicationName?FTAApplicationNameId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAApplicationNameMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAApplicationName?LTAApplicationNameId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
         }).error(function (error) {
@@ -37,53 +37,53 @@
     };
 
 
-    $scope.add = function (FTAApplicationNameMaster) {
-        if (FTAApplicationNameMaster != null) {
-            if (FTAApplicationNameMaster.FTAApplicationName.trim() != "") {
-                ApiCall.MakeApiCall("AddFTAApplicationName", 'POST', FTAApplicationNameMaster).success(function (data) {
+    $scope.add = function (LTAApplicationNameMaster) {
+        if (LTAApplicationNameMaster != null) {
+            if (LTAApplicationNameMaster.LTAApplicationName.trim() != "") {
+                ApiCall.MakeApiCall("AddLTAApplicationName", 'POST', LTAApplicationNameMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
-                        $scope.FTAApplicationNameMaster = null;
-                        $scope.GetAllFTAApplicationNameMaster();
+                        $scope.LTAApplicationNameMaster = null;
+                        $scope.GetAllLTAApplicationNameMaster();
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'FTA ApplicationName added successfully', null);
+                        toaster.pop('success', "Success", 'LTA Application Name added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTA ApplicationName ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA ApplicationName ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTA ApplicationName', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Application Name', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAApplicationName', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Application Name', null);
         }
 
     };
 
-    $scope.GetFTAApplicationNameMasterById = function (FTAApplicationNameMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAApplicationName?FTAApplicationNameId=" + FTAApplicationNameMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAApplicationNameMasterById = function (LTAApplicationNameMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAApplicationName?LTAApplicationNameId=" + LTAApplicationNameMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAApplicationNameMaster = data[0];
+            $scope.LTAApplicationNameMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAApplicationName! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTAApplicationName! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function () {
-        ApiCall.MakeApiCall("DeleteFTAApplicationName?FTAApplicationNameId=" + $scope.FTAApplicationNameMasterId, 'GET', '').success(function (data) {
-            $scope.FTAApplicationNameMaster = null;
+        ApiCall.MakeApiCall("DeleteLTAApplicationName?LTAApplicationNameId=" + $scope.LTAApplicationNameMasterId, 'GET', '').success(function (data) {
+            $scope.LTAApplicationNameMaster = null;
             $scope.editMode = false;
-            $scope.GetAllFTAApplicationNameMaster();
+            $scope.GetAllLTAApplicationNameMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'FTAApplicationName deleted successfully', null);
+            toaster.pop('success', "Success", 'LTA Application Name deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -93,37 +93,37 @@
         $('#confirmModal').modal('show');
     }
 
-    $scope.UpdateFTAApplicationNameMaster = function (model) {
+    $scope.UpdateLTAApplicationNameMaster = function (model) {
         if (model != null) {
-            if (model.FTAApplicationName.trim() != "") {
-                ApiCall.MakeApiCall("ModifyFTAApplicationName", 'POST', model).success(function (data) {
+            if (model.LTAApplicationName.trim() != "") {
+                ApiCall.MakeApiCall("ModifyLTAApplicationName", 'POST', model).success(function (data) {
                     $scope.editMode = false;
-                    $scope.FTAApplicationNameMaster = null;
-                    $scope.GetAllFTAApplicationNameMaster();
+                    $scope.LTAApplicationNameMaster = null;
+                    $scope.GetAllLTAApplicationNameMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'FTAApplicationNameMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'LTA Application Name updated successfully', null);
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAApplicationNameMaster! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Application Name Master! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAApplicationName', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Application Name', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAApplicationName', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA ApplicationName', null);
         }
     };
 
 
 
     $scope.showconfirm = function (data) {
-        $scope.FTAApplicationNameMasterId = data;
+        $scope.LTAApplicationNameMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAApplicationNameMaster = null;
+        $scope.LTAApplicationNameMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -137,14 +137,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAApplicationName Write') {
+                        if (value.RightName == 'LTAApplicationName Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAApplicationNameMaster();
+                    $scope.GetAllLTAApplicationNameMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

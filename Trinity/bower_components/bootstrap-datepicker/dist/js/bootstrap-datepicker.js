@@ -106,8 +106,8 @@
 		this.picker = $(DPGlobal.template);
 
 		// Checking templates and inserting
-		if (this._check_template(this.o.templates.leftArrow)) {
-			this.picker.find('.prev').html(this.o.templates.leftArrow);
+		if (this._check_template(this.o.templates.leLTArrow)) {
+			this.picker.find('.prev').html(this.o.templates.leLTArrow);
 		}
 
 		if (this._check_template(this.o.templates.rightArrow)) {
@@ -1704,7 +1704,7 @@
 		immediateUpdates: false,
 		title: '',
 		templates: {
-			leftArrow: '&#x00AB;',
+			leLTArrow: '&#x00AB;',
 			rightArrow: '&#x00BB;'
 		},
     showWeekDays: true
@@ -1932,7 +1932,7 @@
 			                '<th colspan="7" class="datepicker-title"></th>'+
 			              '</tr>'+
 							'<tr>'+
-								'<th class="prev">'+defaults.templates.leftArrow+'</th>'+
+								'<th class="prev">'+defaults.templates.leLTArrow+'</th>'+
 								'<th colspan="5" class="datepicker-switch"></th>'+
 								'<th class="next">'+defaults.templates.rightArrow+'</th>'+
 							'</tr>'+

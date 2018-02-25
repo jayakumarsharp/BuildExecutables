@@ -2,14 +2,14 @@
 <div ng-controller="ReportsController">
     <div ng-include="'Main/ConfirmModal'"></div>
     <div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;" ng-show="!showaction">
-        <h4>Strategy Report   </h4>
+        <h4>Report</h4>
         <div ng-show="showfilter">
             <div class="col-md-3">
 
                 <div class="form-group">
-                    <label>FTA Application</label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationName" ng-options="item.FTAApplicationName for item in FTAApplicationNameList" title="Select FTAApplication" style="width:100%;font-size: 0.8em" ng-change="userfilter3()" required>
-                        <option value="">- Select FTAApplication Name-</option>
+                    <label>LTA Application</label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationName" ng-options="item.LTAApplicationName for item in LTAApplicationNameList" title="Select LTAApplication" style="width:100%;font-size: 0.8em" ng-change="userfilter3()" required>
+                        <option value="">- Select LTA Application Name-</option>
                     </select>
 
                 </div>
@@ -29,9 +29,9 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label>FTA Application Code</label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationCode" ng-options="item.FTAApplicationCode for item in FTAApplicationCodeList" title="Select FTAApplicationCode" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAApplication Code -</option>
+                    <label>LTA Application Code</label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationCode" ng-options="item.LTAApplicationCode for item in LTAApplicationCodeList" title="Select LTAApplicationCode" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Code -</option>
                     </select>
                 </div>
 
@@ -43,8 +43,8 @@
                 </div>
                 <div class="form-group">
                     <label>ChildID </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select FTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ChildID -</option>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Child ID -</option>
                     </select>
                 </div>
             </div>
@@ -52,12 +52,12 @@
                 <div class="form-group">
                     <label>Application Category</label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.ApplicationCategory" ng-options="item.ApplicationCategory for item in ApplicationCategoryList" title="Select Application Category" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ApplicationCategory -</option>
+                        <option value="">- Select Application Category -</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>ThirdParty Application</label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select FTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
                         <option value="">- Select ThirdParty-</option>
                     </select>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label>Parent ID</label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.ParentID" ng-options="item.ParentID for item in ParentIDList" title="Select ParentID" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ParentID-</option>
+                        <option value="">- Select Parent ID-</option>
                     </select>
                 </div>
             </div>
@@ -73,20 +73,20 @@
                 <div class="form-group">
                     <label>Venue type</label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.Venuetype" ng-options="item.Venuetype for item in VenuetypeList" title="Select Region" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select Venuetype-</option>
+                        <option value="">- Select Venue Type-</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>FTA Strategy Code</label>
-                    <select class="form-control" ng-model="selectModel.FTAStrategyCode" ng-options="item.FTAStrategyCode for item in FTAStrategyCodeList" title="Select FTAStrategyCode" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAStrategy Code -</option>
+                    <label>LTA Strategy Code</label>
+                    <select class="form-control" ng-model="selectModel.LTAStrategyCode" ng-options="item.LTAStrategyCode for item in LTAStrategyCodeList" title="Select LTAStrategyCode" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Code -</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>FTA Application Owner </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationOwner" ng-options="item.userId for item in FTAApplicationOwnerList" title="Select FTAApplicationOwner" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAApplicationOwner -</option>
+                    <label>LTA Application Owner </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationOwner" ng-options="item.userId for item in LTAApplicationOwnerList" title="Select LTAApplicationOwner" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Owner -</option>
                     </select>
                 </div>
 

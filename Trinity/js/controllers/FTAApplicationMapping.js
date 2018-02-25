@@ -1,4 +1,4 @@
-﻿ReportApp.controller('FTAApplicationMappingController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', 'StrategyService', 'apiService', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder, $q, StrategyService, apiService) {
+﻿ReportApp.controller('LTAApplicationMappingController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', 'StrategyService', 'apiService', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder, $q, StrategyService, apiService) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.editMode = false;
@@ -7,11 +7,11 @@
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAApplicationName').withTitle('FTA Application Name'),
-        DTColumnBuilder.newColumn('FTAApplicationCode').withTitle('FT AApplication Code'),
+        DTColumnBuilder.newColumn('LTAApplicationName').withTitle('LTA Application Name'),
+        DTColumnBuilder.newColumn('LTAApplicationCode').withTitle('LTA AApplication Code'),
         DTColumnBuilder.newColumn('ChildIdValue').withTitle('Child ID'),
-        DTColumnBuilder.newColumn('ThirdPartyAppName').withTitle('ThirdParty'),
-        DTColumnBuilder.newColumn('ParentID').withTitle('ParentID'),
+        DTColumnBuilder.newColumn('ThirdPartyAppName').withTitle('Third Party'),
+        DTColumnBuilder.newColumn('ParentID').withTitle('Parent ID'),
         DTColumnBuilder.newColumn('ApplicationCategory').withTitle('Application Category'),
         DTColumnBuilder.newColumn('ApplicationOwnerId').withTitle('Application Owner'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
@@ -26,8 +26,8 @@
     $scope.Showadd = function () {
         $scope.showAddwindow = true;
     }
-    $scope.GetAllFTAApplicationMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAApplicationMapping?FTAApplicationId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAApplicationMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAApplicationMapping?LTAApplicationId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
 
@@ -35,91 +35,91 @@
             $scope.Error = error;
         });
         let GetUsers = UserFactory.GetUser('NA');
-        let GetAllFTAApplicationCode = apiService.GetAllFTAApplicationCode()
+        let GetAllLTAApplicationCode = apiService.GetAllLTAApplicationCode()
         let GetAllThirdPartyAppList = apiService.GetAllThirdPartyAppList()
-        let GetAllFTAStrategyCode = apiService.GetAllFTAStrategyCode()
+        let GetAllLTAStrategyCode = apiService.GetAllLTAStrategyCode()
         let GetAllParentID = apiService.GetAllParentID()
         let GetAllChildID = apiService.GetAllChildID()
         let GetAllApplicationCategory = apiService.GetAllApplicationCategory()
-        let GetAllFTAApplicationName = apiService.GetAllFTAApplicationName()
+        let GetAllLTAApplicationName = apiService.GetAllLTAApplicationName()
 
         $q.all([
-                GetAllFTAApplicationCode,
+                GetAllLTAApplicationCode,
         GetAllThirdPartyAppList,
         GetAllParentID,
         GetAllChildID,
         GetAllApplicationCategory,
-        GetAllFTAApplicationName,
+        GetAllLTAApplicationName,
         GetUsers
         ]).then(function (resp) {
-            $scope.FTAApplicationCodeList = resp[0].data;
+            $scope.LTAApplicationCodeList = resp[0].data;
             $scope.ThirdPartyList = resp[1].data;
             $scope.ParentIDList = resp[2].data;
             $scope.ChildIDList = resp[3].data;
             $scope.ApplicationCategoryList = resp[4].data;
-            $scope.FTAApplicationNameList = resp[5].data;
-            $scope.FTAApplicationOwnerList = resp[6].data;
+            $scope.LTAApplicationNameList = resp[5].data;
+            $scope.LTAApplicationOwnerList = resp[6].data;
         });
         $timeout(function () {
             StrategyService.HideLoader();
         }, 1000)
     };
-    $scope.add = function (FTAApplicationMaster) {
-        if (FTAApplicationMaster != null) {
-            if (FTAApplicationMaster.FTAApplicationName.FTAApplicationName && FTAApplicationMaster.FTAApplicationCode.FTAApplicationCode && FTAApplicationMaster.ChildID.ChildID && FTAApplicationMaster.ThirdPartyApp.Value) {
+    $scope.add = function (LTAApplicationMaster) {
+        if (LTAApplicationMaster != null) {
+            if (LTAApplicationMaster.LTAApplicationName.LTAApplicationName && LTAApplicationMaster.LTAApplicationCode.LTAApplicationCode && LTAApplicationMaster.ChildID.ChildID && LTAApplicationMaster.ThirdPartyApp.Value) {
                 var input = {
-                    FTAApplicationNameId: FTAApplicationMaster.FTAApplicationName.Id, FTAApplicationCodeId: FTAApplicationMaster.FTAApplicationCode.Id, ChildID: FTAApplicationMaster.ChildID.Id, ThirdPartyAppId: FTAApplicationMaster.ThirdPartyApp.Id,
-                    ParentID: FTAApplicationMaster.ParentID.Id, ApplicationOwnerId: FTAApplicationMaster.FTAApplicationOwner.userId, ApplicationCategoryId: FTAApplicationMaster.ApplicationCategory.Id
+                    LTAApplicationNameId: LTAApplicationMaster.LTAApplicationName.Id, LTAApplicationCodeId: LTAApplicationMaster.LTAApplicationCode.Id, ChildID: LTAApplicationMaster.ChildID.Id, ThirdPartyAppId: LTAApplicationMaster.ThirdPartyApp.Id,
+                    ParentID: LTAApplicationMaster.ParentID.Id, ApplicationOwnerId: LTAApplicationMaster.LTAApplicationOwner.userId, ApplicationCategoryId: LTAApplicationMaster.ApplicationCategory.Id
                 };
 
-                ApiCall.MakeApiCall("AddFTAApplicationMapping", 'POST', input).success(function (data) {
+                ApiCall.MakeApiCall("AddLTAApplicationMapping", 'POST', input).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
                         if (data == "success") {
-                            $scope.FTAApplicationMaster = null;
-                            $scope.GetAllFTAApplicationMaster();
+                            $scope.LTAApplicationMaster = null;
+                            $scope.GetAllLTAApplicationMaster();
                             $scope.editMode = false;
 
                             $scope.showAddwindow = false;
-                            toaster.pop('success', "Success", 'FTAApplication added successfully', null);
+                            toaster.pop('success', "Success", 'LTA Application added successfully', null);
                         }
                         else
                             toaster.pop('warning', "Warning", data, null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAApplication ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Application ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAApplication', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Application', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAApplication', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Application', null);
         }
     };
 
-    $scope.GetFTAApplicationMasterById = function (FTAApplicationMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAApplication?FTAApplicationId=" + FTAApplicationMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAApplicationMasterById = function (LTAApplicationMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAApplication?LTAApplicationId=" + LTAApplicationMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAApplicationMaster = data[0];
+            $scope.LTAApplicationMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAApplication! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTA Application! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function (id) {
-        ApiCall.MakeApiCall("DeleteFTAApplicationMapping?Id=" + id, 'GET', '').success(function (data) {
+        ApiCall.MakeApiCall("DeleteLTAApplicationMapping?Id=" + id, 'GET', '').success(function (data) {
             if (data == "success") {
-                $scope.FTAApplicationMaster = null;
+                $scope.LTAApplicationMaster = null;
                 $scope.editMode = false;
-                $scope.GetAllFTAApplicationMaster();
+                $scope.GetAllLTAApplicationMaster();
                 $('#confirmModal').modal('hide');
                 $scope.showAddwindow = false;
-                toaster.pop('success', "Success", 'FTAApplication deleted successfully', null);
+                toaster.pop('success', "Success", 'LTA Application deleted successfully', null);
             }
             else
                 toaster.pop('warning', "Warning", data, null);
@@ -133,12 +133,12 @@
     }
 
     $scope.showconfirm = function (data) {
-        $scope.FTAApplicationMasterId = data;
+        $scope.LTAApplicationMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAApplicationMaster = null;
+        $scope.LTAApplicationMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -152,14 +152,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAApplication Write') {
+                        if (value.RightName == 'LTAApplication Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAApplicationMaster();
+                    $scope.GetAllLTAApplicationMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

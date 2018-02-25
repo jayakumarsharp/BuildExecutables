@@ -1573,7 +1573,7 @@ test('templates', function(){
             .appendTo('#qunit-fixture')
             .datepicker({
                 templates: {
-                    leftArrow: '<span class="glyphicon glyphicon-arrow-left"></span>',
+                    leLTArrow: '<span class="glyphicon glyphicon-arrow-left"></span>',
                     rightArrow: '</table>'
                 }
             }),
@@ -1592,7 +1592,7 @@ test('Nav arrow html templates with span tag', function () {
             .datepicker({
                 format: 'yyyy-mm-dd',
                 templates: {
-                    leftArrow: '<span></span>',
+                    leLTArrow: '<span></span>',
                     rightArrow: '<span></span>'
                 }
             }),
@@ -1613,7 +1613,7 @@ test('Nav arrow html templates .prev click', function () {
             format: 'yyyy-mm-dd',
             startView: 1,
             templates: {
-                leftArrow: '<i></i>'
+                leLTArrow: '<i></i>'
             }
         }),
         dp = input.data('datepicker'),

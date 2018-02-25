@@ -18,9 +18,9 @@
 
 
 <div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar"  style="width:83%;">
-    <h4>      Manage FTAStrategyCode </h4>
+    <h4>      Manage LTA Application Owner  </h4>
     <div class="row">
-        <div ng-controller="FTAStrategyCodeMasterController" class="nav-tabs-custom">
+        <div ng-controller="LTAApplicationOwnerMasterController" class="nav-tabs-custom">
             <div ng-include="'Main/ConfirmModal'"></div>
             <div class="row pull-right"  style="margin-right:14%;">
                 <button ng-show="!showAddwindow" data-ng-click="Showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
@@ -30,12 +30,12 @@
 
                     <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
                         <div class="col-md-6 form-group" style="position: static;">
-                            <label for="input-text-1">FTAStrategyCode </label>
-                            <input type="text" class="form-control" id="input-id-1" placeholder="FTAStrategyCode " ng-model=FTAStrategyCodeMaster.FTAStrategyCode>
+                            <label for="input-text-1">LTA Application Owner </label>
+                            <input type="text" class="form-control" id="input-id-1" placeholder="LTA Application Owner" ng-model=LTAApplicationOwnerMaster.LTAApplicationOwner>
                         </div>
 
-                        <button data-ng-show="editMode" data-ng-click="UpdateFTAStrategyCodeMaster(FTAStrategyCodeMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
-                        <button data-ng-show="!editMode" data-ng-click="add(FTAStrategyCodeMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
+                        <button data-ng-show="editMode" data-ng-click="UpdateLTAApplicationOwnerMaster(LTAApplicationOwnerMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
+                        <button data-ng-show="!editMode" data-ng-click="add(LTAApplicationOwnerMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
                         <button data-ng-click="Confirmcancel()" class="col-md-2 btn btn-primary cancel">Cancel </button>
 
                     </div>

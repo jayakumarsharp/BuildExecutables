@@ -4,52 +4,57 @@
         <div class="col-md-4">
             <div class="box-body">
                 <div class="form-group">
-                    <label>FTA Application Name </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationName" ng-change="userfilter3()" ng-options="item.FTAApplicationName for item in FTAApplicationNameList" title="Select FTAApplicationName" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAApplicationName -</option>
+                    <label>LTA Application Name </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationName" ng-change="userfilter3()" ng-options="item.LTAApplicationName for item in LTAApplicationNameList" title="Select LTAApplicationName" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Name -</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Third Party Application </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select FTAApplicationSuffix" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ThirdParty-</option>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select LTAApplicationSuffix" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Third Party Application-</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label>FTA Application Owner </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationOwner" ng-options="item.userId for item in FTAApplicationOwnerList" title="Select FTAApplicationOwner" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAApplicationOwner -</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label>FTA Strategy Name </label>
-                    <select class="form-control" name="ddlProduct" ng-model="selectModel.FTAStrategyName" ng-options="item.FTAStrategyName for item in FTAStrategyNameList" ng-change="userfilter4()" title="Select FTAStrategyName" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAStrategy Name -</option>
+                    <label>LTA Application Owner </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationOwner" ng-options="item.userId for item in LTAApplicationOwnerList" title="Select LTAApplicationOwner" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Owner -</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>FTA Short Code </label>
-                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.FTAShortCode">
-
-                </div>
-
-
-                <div class="form-group">
-                    <label>Strategy type </label>
-                    <select class="form-control" ng-model="selectModel.Strategytype" ng-options="item.Strategytype for item in StrategytypeList" ng-change="userfilter2()" title="Select Strategy Type" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select Strategy type -</option>
+                    <label>LTA Strategy Name </label>
+                    <select class="form-control" name="ddlProduct" ng-model="selectModel.LTAStrategyName" ng-options="item.LTAStrategyName for item in LTAStrategyNameList" ng-change="userfilter4()" title="Select LTAStrategyName" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Name -</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>LTA Short Code </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.LTAShortCode">
+
+                </div>
+                <div class="form-group">
+                    <label>Business Line </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.BusinessLine" ng-options="item.BusinessLine for item in BusinessLineList" ng-change="userfilter(false)" title="Select BusinessLine" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Business Line-</option>
+                    </select>
+                </div>
+                
 
                 <div class="form-group">
                     <label>Venue type </label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.Venuetype" ng-options="item.Venuetype for item in VenuetypeList" ng-change="userfilter2()" title="Select VenueType" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select Venuetype-</option>
+                        <option value="">- Select Venue Type-</option>
                     </select>
                 </div>
+
+
+                <div class="form-group">
+                    <label>Priority </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.Priority">
+
+                </div>
+
                 <div class="form-group">
                     <label>Go-Live date </label>
                     <div class="col-lg-12">
@@ -79,9 +84,9 @@
         <div class="col-md-4">
             <div class="box-body">
                 <div class="form-group">
-                    <label>FTA Application Code </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationCode" ng-change="userfilter1()" ng-options="item.FTAApplicationCode for item in FTAApplicationCodeList" title="Select FTAApplicationCode" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAApplication Code -</option>
+                    <label>LTA Application Code </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationCode" ng-change="userfilter1()" ng-options="item.LTAApplicationCode for item in LTAApplicationCodeList" title="Select LTAApplicationCode" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Code -</option>
                     </select>
                 </div>
 
@@ -89,7 +94,7 @@
                     <label>Parent ID </label>
 
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.ParentID" ng-options="item.ParentID for item in ParentIDList" disabled title="Select ParentID" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ParentID-</option>
+                        <option value="">- Select Parent ID-</option>
                     </select>
                 </div>
 
@@ -100,30 +105,35 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>FTA Strategy Code </label>
-                    <select class="form-control" ng-model="selectModel.FTAStrategyCode" ng-change="userfilter1()" ng-options="item.FTAStrategyCode for item in FTAStrategyCodeList" title="Select FTAStrategyCode" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAStrategy Code -</option>
+                    <label>LTA Strategy Code </label>
+                    <select class="form-control" ng-model="selectModel.LTAStrategyCode" ng-change="userfilter1()" ng-options="item.LTAStrategyCode for item in LTAStrategyCodeList" title="Select LTAStrategyCode" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Code -</option>
                     </select>
                 </div>
-
 
                 <div class="form-group">
-                    <label>Business Line </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.BusinessLine" ng-options="item.BusinessLine for item in BusinessLineList" ng-change="userfilter(false)" title="Select BusinessLine" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select BusinessLine-</option>
+                    <label>LTA Long Code</label>
+                    <input type="text" class="form-control" maxlength="1500" placeholder="Enter LTA Long Code" ng-model="selectModel.LTALongCode">
+                </div>
+                
+                <div class="form-group">
+                    <label>LTA Strategy Owner </label>
+                    <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAStrategyOwner" ng-options="item.userId for item in LTAStrategyOwnerList" title="Select LTAApplicationOwner" ng-change="checksignoff()" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Owner -</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>Capacity </label>
                     <select class="form-control" name="ddlCapacity" ng-model="selectModel.Capacity" ng-options="item.Capacity for item in CapacityList" ng-change="userfilter2()" title="Select Capacity" style="width:100%;font-size: 0.8em" required>
                         <option value="">- Select Capacity -</option>
                     </select>
                 </div>
+                
 
                 <div class="form-group">
-                    <label>Priority </label>
-                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.Priority">
-
+                    <label>Priority Score </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.PriorityScore">
                 </div>
 
                 <div class="form-group">
@@ -157,14 +167,14 @@
                 <div class="form-group">
                     <label>Child ID </label>
                     <select class="form-control" name="ddlApp" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select ChildID" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ChildID -</option>
+                        <option value="">- Select Child ID -</option>
                     </select>
 
                 </div>
                 <div class="form-group">
                     <label>Application Category </label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.ApplicationCategory" ng-options="item.ApplicationCategory for item in ApplicationCategoryList" title="Select Application Category" disabled style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select ApplicationCategory -</option>
+                        <option value="">- Select Application Category -</option>
                     </select>
                 </div>
 
@@ -177,7 +187,7 @@
                 <div class="form-group">
                     <label>Discretionary Code </label>
                     <select class="form-control" name="ddlSBU" ng-model="selectModel.DiscretionaryCode" ng-change="userfilter1()" ng-options="item.DiscretionaryCode for item in DiscretionaryCodeList" title="Select DiscretionaryCode" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select DiscretionaryCode-</option>
+                        <option value="">- Select Discretionary Code-</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -186,17 +196,17 @@
                         <option value="">- Select Region -</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>FTA Strategy Owner </label>
-                    <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAStrategyOwner" ng-options="item.userId for item in FTAStrategyOwnerList" title="Select FTAApplicationOwner" ng-change="checksignoff()" style="width:100%;font-size: 0.8em" required>
-                        <option value="">- Select FTAStrategyOwner -</option>
+                    <label>Senior Management Function</label>
+                    <input type="text" class="form-control" maxlength="1500" placeholder="Enter Senior Management Function" ng-model="selectModel.SeniorManagementFunction">
+                </div>
+                <div class="form-group">
+                    <label>Strategy type </label>
+                    <select class="form-control" ng-model="selectModel.Strategytype" ng-options="item.Strategytype for item in StrategytypeList" ng-change="userfilter2()" title="Select Strategy Type" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Strategy Type -</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Priority Score </label>
-                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.PriorityScore">
-                </div>
+
 
 
                 <div class="form-group">
@@ -205,12 +215,7 @@
                                  ms-options="multiselect.options">
                     </multiselect>
                 </div>
-
-                @*FTA Owner Attestation*@
-
-
-
-
+                @*LTA Owner Attestation*@
             </div>
         </div>
         @*3rd Box end*@
@@ -252,7 +257,7 @@
                 <label class="mt-checkbox mt-checkbox-outline col-sm-2"></label>
                 <div class="btn-group">
                     <span>
-                        <button type="button" ng-click="setsignoff()" class="btn" ng-class="{'btn-success': selectModel.SignOff== 'True' }">SIGN OFF</button>
+                        <button type="button" ng-click="setsignoff()" class="btn" ng-class="{'btn-success': selectModel.Attest== 'True' }">Attest</button>
                     </span>&nbsp;
                 </div>
             </div>

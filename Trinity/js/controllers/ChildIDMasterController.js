@@ -4,7 +4,7 @@
     $scope.dtOptions = DTOptionsBuilder.fromSource()
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('ChildID').withTitle('ChildID'),
+        DTColumnBuilder.newColumn('ChildID').withTitle('Child ID'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
         .renderWith(actionsHtml)
     ];
@@ -46,18 +46,18 @@
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'ChildID added successfully', null);
+                        toaster.pop('success', "Success", 'Child ID added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding ChildID ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding Child ID ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter ChildID', null);
+                toaster.pop('warning', "Warning", 'Please enter Child ID', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter ChildID', null);
+            toaster.pop('warning', "Warning", 'Please enter Child ID', null);
         }
 
     };
@@ -68,7 +68,7 @@
             $scope.showAddwindow = true;
             $scope.ChildIDMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding ChildID! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding Child ID! " + data.ExceptionMessage;
         });
     };
 
@@ -80,7 +80,7 @@
             $scope.GetAllChildIDMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'ChildID deleted successfully', null);
+            toaster.pop('success', "Success", 'Child ID deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -98,17 +98,17 @@
                     $scope.ChildIDMaster = null;
                     $scope.GetAllChildIDMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'ChildIDMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'Child ID updated successfully', null);
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding ChildIDMaster! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding Child ID ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter ChildID', null);
+                toaster.pop('warning', "Warning", 'Please enter Child ID', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter ChildID', null);
+            toaster.pop('warning', "Warning", 'Please enter Child ID', null);
         }
     };
 

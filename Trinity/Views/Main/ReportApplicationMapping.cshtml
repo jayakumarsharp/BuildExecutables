@@ -1,42 +1,48 @@
 ﻿
 <div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar" style="width:83%;">
-    <h4>      Manage Report Application Mapping </h4>
+    <h4>      Manage  LTA Application Inventory @*Report Application Mapping*@ </h4>
     <div class="row">
         <div ng-controller="ReportsApplicationMappingController" class="nav-tabs-custom">
             <div ng-include="'Main/ConfirmModal'"></div>
+
             <div class="row pull-right">
+                <a target="_self" id="downloadpdf" href={{downloadurl}} download={{filename}} style="display: none"></a>
+                @*<button data-ng-click="showfiltercondition()" class="btn btn-primary pull-right">Show Filter</button>
+                    <button data-ng-click="removefilter()" class="btn btn-primary pull-right">Reset Filter</button>
+                    <button data-ng-click="showreport()" class="btn btn-primary pull-right">Generate Report</button>*@
+                <button data-ng-click="Export()" class="btn btn-primary pull-right">Export</button>
                 <button ng-show="!showAddwindow" data-ng-click="Showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
             </div>
             <div ng-show="showAddwindow" class="sec-one">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>FTA Application</label>
-                        <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationName" ng-options="item.FTAApplicationName for item in FTAApplicationNameList" title="Select FTAApplication" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select FTAApplication Name-</option>
+                        <label>LTA Application</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationName" ng-options="item.LTAApplicationName for item in LTAApplicationNameList" title="Select LTAApplication" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select LTA Application Name-</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>FTAApplicationCode</label>
-                        <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationCode" ng-options="item.FTAApplicationCode for item in FTAApplicationCodeList" title="Select FTAApplication Code" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select FTAApplication Code-</option>
+                        <label>LTA Application Code</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationCode" ng-options="item.LTAApplicationCode for item in LTAApplicationCodeList" title="Select LTAApplication Code" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select LTA Application Code-</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>ChildID </label>
-                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select FTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select ChildID -</option>
+                        <label>Child ID </label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select Child ID -</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>ThirdParty Application</label>
-                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select FTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select ThirdParty-</option>
+                        <label>Third Party Application</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select Third Party-</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Business Line </label>
                         <select class="form-control" name="ddlSBU" ng-model="selectModel.BusinessLine" ng-options="item.BusinessLine for item in BusinessLineList" ng-change="userfilter(false)" title="Select BusinessLine" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select BusinessLine-</option>
+                            <option value="">- Select Business Line-</option>
                         </select>
                     </div>
                 </div>
@@ -45,21 +51,21 @@
                     <div class="form-group">
                         <label>Parent ID</label>
                         <select class="form-control" name="ddlSBU" ng-model="selectModel.ParentID" ng-options="item.ParentID for item in ParentIDList" title="Select ParentID" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select ParentID-</option>
+                            <option value="">- Select Parent ID-</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Application Owner</label>
-                        <select class="form-control" name="ddlSBU" ng-model="selectModel.FTAApplicationOwner" ng-options="item.userId for item in FTAApplicationOwnerList" title="Select FTAApplicationOwner" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select FTAApplicationOwner -</option>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationOwner" ng-options="item.userId for item in LTAApplicationOwnerList" title="Select LTAApplicationOwner" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select LTA Application Owner -</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Application Category</label>
                         <select class="form-control" name="ddlSBU" ng-model="selectModel.ApplicationCategory" ng-options="item.ApplicationCategory for item in ApplicationCategoryList" title="Select Application Category" style="width:100%;font-size: 0.8em" required>
-                            <option value="">- Select ApplicationCategory -</option>
+                            <option value="">- Select Application Category -</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -78,7 +84,7 @@
                     </div>
 
                     <div class="row col-md-12">
-                        <button data-ng-show="editMode" data-ng-click="UpdateFTAApplicationMaster(FTAApplicationMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
+                        <button data-ng-show="editMode" data-ng-click="UpdateLTAApplicationMaster(LTAApplicationMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
                         <button data-ng-show="!editMode" data-ng-click="add(selectModel)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
                         <button data-ng-click="Confirmcancel()" class="col-md-2 btn btn-primary cancel">Cancel </button>
 

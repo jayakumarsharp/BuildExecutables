@@ -6,6 +6,7 @@
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
         DTColumnBuilder.newColumn('Capacity').withTitle('Capacity'),
+        DTColumnBuilder.newColumn('Capacitycode').withTitle('Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -57,11 +58,11 @@
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Capacity', null);
+                toaster.pop('warning', "Warning", 'Please enter Capacity and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Capacity', null);
+            toaster.pop('warning', "Warning", 'Please enter Capacity and code', null);
         }
 
     };
@@ -96,7 +97,7 @@
 
     $scope.UpdateCapacityMaster = function (model) {
         if (model != null) {
-            if (model.Capacity.trim() != "") {
+            if (model.Capacity && model.Capacitycode) {
                 ApiCall.MakeApiCall("ModifyCapacity", 'POST', model).success(function (data) {
                     $scope.editMode = false;
                     $scope.CapacityMaster = null;
@@ -108,11 +109,11 @@
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Capacity', null);
+                toaster.pop('warning', "Warning", 'Please enter Capacity and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Capacity', null);
+            toaster.pop('warning', "Warning", 'Please enter Capacity and code', null);
         }
     };
 

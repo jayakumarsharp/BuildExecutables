@@ -6,6 +6,7 @@
 <html style="height: auto; min-height: 100%;">
 <head>
     <base href="/Trinity/">
+    @*<base href="/">*@
     <meta charset="utf-8" />
     <title> Trinity</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,13 +37,13 @@
                                 <img src="~/images/img-set.png">
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="#">Profile</a></li>
-                                <li class="divider"></li>
+                                @*<li><a href="#">Profile</a></li>
+                                    <li class="divider"></li>*@
                                 <li><a ng-click="clearlogout()" href="@Url.Action("Logout", "Home")">Sign out</a></li>
                             </ul>
                         </div>
                         <div class="info">
-                            <p>@Convert.ToString(Session["UserName"]) </p>
+                            <p>@Convert.ToString(Session["DisplayName"]) </p>
 
                         </div>
                     </div>
@@ -73,11 +74,7 @@
             Loading...
         </div>
     </div>
-    @*<script src="~/Assert/angular-animate.min.js"></script>
-        <script src="~/Assert/toaster.js"></script>
-        <script type="text/javascript" src="~/plugins/ng-file-upload/dist/ng-file-upload.min.js"></script>
-        <script type="text/javascript" src="~/plugins/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>*@
-
+    
     <style>
         i.active, .inactive {
             font-size: 40px;

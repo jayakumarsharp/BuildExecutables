@@ -30,8 +30,12 @@
 
                     <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
                         <div class="col-md-6 form-group" style="position: static;">
-                            <label for="input-text-1">Venuetype </label>
-                            <input type="number" class="form-control"  placeholder="Venuetype " ng-model=VenuetypeMaster.Venuetype>
+                            <label for="input-text-1">Venue Type </label>
+                            <input type="text" class="form-control" placeholder="Venuetype " ng-model=VenuetypeMaster.Venuetype>
+                        </div>
+                        <div class="col-md-6 form-group" style="position: static;">
+                            <label for="input-text-1">Venue Type Code</label>
+                            <input type="number" class="form-control" placeholder="Venuetype " ng-model=VenuetypeMaster.Venuetypecode>
                         </div>
 
                         <button data-ng-show="editMode" data-ng-click="UpdateVenuetypeMaster(VenuetypeMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>

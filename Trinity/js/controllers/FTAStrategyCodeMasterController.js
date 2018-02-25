@@ -1,11 +1,11 @@
-﻿ReportApp.controller('FTAStrategyCodeMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
+﻿ReportApp.controller('LTAStrategyCodeMasterController', ['$scope', '$rootScope', '$timeout', 'ApiCall', 'UserFactory', 'reportFactory', 'toaster', '$compile', 'DTOptionsBuilder', 'DTColumnBuilder', function ($scope, $rootScope, $timeout, ApiCall, UserFactory, reportFactory, toaster, $compile, DTOptionsBuilder, DTColumnBuilder) {
     $scope.data = [];
     $scope.showAddwindow = false;
     $scope.dtOptions = DTOptionsBuilder.fromSource()
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('FTAStrategyCode').withTitle('FTAStrategyCode'),
+        DTColumnBuilder.newColumn('LTAStrategyCode').withTitle('LTA Strategy Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -18,7 +18,7 @@
 
     function actionsHtml(data, type, full, meta) {
         $scope.data = data;
-        return '<a  ng-click="GetFTAStrategyCodeMasterById(' + data + ')"><img src="images/edit.png"></a> ';
+        return '<a  ng-click="GetLTAStrategyCodeMasterById(' + data + ')"><img src="images/edit.png"></a> ';
         //+'<button class="btn btn-danger" ng-click="delete(' + data + ')" )"="">' +
         //'   <i class="fa fa-trash-o"></i>' +
         //'</button>';
@@ -31,8 +31,8 @@
     }
 
 
-    $scope.GetAllFTAStrategyCodeMaster = function () {
-        ApiCall.MakeApiCall("GetAllFTAStrategyCode?FTAStrategyCodeId=", 'GET', '').success(function (data) {
+    $scope.GetAllLTAStrategyCodeMaster = function () {
+        ApiCall.MakeApiCall("GetAllLTAStrategyCode?LTAStrategyCodeId=", 'GET', '').success(function (data) {
             $scope.data = data;
             $scope.dtOptions.data = $scope.data
         }).error(function (error) {
@@ -41,53 +41,53 @@
     };
 
 
-    $scope.add = function (FTAStrategyCodeMaster) {
-        if (FTAStrategyCodeMaster != null) {
-            if (FTAStrategyCodeMaster.FTAStrategyCode.trim() != "") {
-                ApiCall.MakeApiCall("AddFTAStrategyCode", 'POST', FTAStrategyCodeMaster).success(function (data) {
+    $scope.add = function (LTAStrategyCodeMaster) {
+        if (LTAStrategyCodeMaster != null) {
+            if (LTAStrategyCodeMaster.LTAStrategyCode.trim() != "") {
+                ApiCall.MakeApiCall("AddLTAStrategyCode", 'POST', LTAStrategyCodeMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
                     } else {
-                        $scope.FTAStrategyCodeMaster = null;
-                        $scope.GetAllFTAStrategyCodeMaster();
+                        $scope.LTAStrategyCodeMaster = null;
+                        $scope.GetAllLTAStrategyCodeMaster();
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'FTAStrategyCode added successfully', null);
+                        toaster.pop('success', "Success", 'LTA Strategy Code added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAStrategyCode ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTA Strategy Code! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAStrategyCode', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Strategy Code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAStrategyCode', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Strategy Code', null);
         }
 
     };
 
-    $scope.GetFTAStrategyCodeMasterById = function (FTAStrategyCodeMasterId) {
-        ApiCall.MakeApiCall("GetAllFTAStrategyCode?FTAStrategyCodeId=" + FTAStrategyCodeMasterId, 'GET', '').success(function (data) {
+    $scope.GetLTAStrategyCodeMasterById = function (LTAStrategyCodeMasterId) {
+        ApiCall.MakeApiCall("GetAllLTAStrategyCode?LTAStrategyCodeId=" + LTAStrategyCodeMasterId, 'GET', '').success(function (data) {
             $scope.editMode = true;
             $scope.showAddwindow = true;
-            $scope.FTAStrategyCodeMaster = data[0];
+            $scope.LTAStrategyCodeMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding FTAStrategyCode! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding LTA Strategy Code! " + data.ExceptionMessage;
         });
     };
 
 
     $scope.delete = function () {
-        ApiCall.MakeApiCall("DeleteFTAStrategyCode?FTAStrategyCodeId=" + $scope.FTAStrategyCodeMasterId, 'GET', '').success(function (data) {
-            $scope.FTAStrategyCodeMaster = null;
+        ApiCall.MakeApiCall("DeleteLTAStrategyCode?LTAStrategyCodeId=" + $scope.LTAStrategyCodeMasterId, 'GET', '').success(function (data) {
+            $scope.LTAStrategyCodeMaster = null;
             $scope.editMode = false;
-            $scope.GetAllFTAStrategyCodeMaster();
+            $scope.GetAllLTAStrategyCodeMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'FTAStrategyCode deleted successfully', null);
+            toaster.pop('success', "Success", 'LTA Strategy Code deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -97,37 +97,37 @@
         $('#confirmModal').modal('show');
     }
 
-    $scope.UpdateFTAStrategyCodeMaster = function (model) {
+    $scope.UpdateLTAStrategyCodeMaster = function (model) {
         if (model != null) {
-            if (model.FTAStrategyCode.trim() != "") {
-                ApiCall.MakeApiCall("ModifyFTAStrategyCode", 'POST', model).success(function (data) {
+            if (model.LTAStrategyCode.trim() != "") {
+                ApiCall.MakeApiCall("ModifyLTAStrategyCode", 'POST', model).success(function (data) {
                     $scope.editMode = false;
-                    $scope.FTAStrategyCodeMaster = null;
-                    $scope.GetAllFTAStrategyCodeMaster();
+                    $scope.LTAStrategyCodeMaster = null;
+                    $scope.GetAllLTAStrategyCodeMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'FTAStrategyCodeMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'LTA Strategy Code updated successfully', null);
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding FTAStrategyCodeMaster! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding LTAStrategyCodeMaster! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter FTAStrategyCode', null);
+                toaster.pop('warning', "Warning", 'Please enter LTA Strategy Code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter FTAStrategyCode', null);
+            toaster.pop('warning', "Warning", 'Please enter LTA Strategy Code', null);
         }
     };
 
 
 
     $scope.showconfirm = function (data) {
-        $scope.FTAStrategyCodeMasterId = data;
+        $scope.LTAStrategyCodeMasterId = data;
         $('#confirmModal').modal('show');
     };
 
     $scope.cancel = function () {
-        $scope.FTAStrategyCodeMaster = null;
+        $scope.LTAStrategyCodeMaster = null;
         $scope.editMode = false;
         $scope.showAddwindow = false;
         $('#confirmModal').modal('hide');
@@ -141,14 +141,14 @@
                     var isRead = true;
                     $scope.IsReadOnly = true;
                     angular.forEach(data, function (value, key) {
-                        if (value.RightName == 'FTAStrategyCode Write') {
+                        if (value.RightName == 'LTAStrategyCode Write') {
                             isRead = false;
                         }
                     })
                     if (!isRead) {
                         $scope.IsReadOnly = false;
                     }
-                    $scope.GetAllFTAStrategyCodeMaster();
+                    $scope.GetAllLTAStrategyCodeMaster();
                 }).error(function (error) {
                     console.log('Error when getting rights list: ' + error);
                 });

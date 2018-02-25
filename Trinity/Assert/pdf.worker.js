@@ -10990,7 +10990,7 @@
     t['ldotaccent'] = 0x0140;
     t['ldotbelow'] = 0x1E37;
     t['ldotbelowmacron'] = 0x1E39;
-    t['leftangleabovecmb'] = 0x031A;
+    t['leLTAngleabovecmb'] = 0x031A;
     t['lefttackbelowcmb'] = 0x0318;
     t['less'] = 0x003C;
     t['lessequal'] = 0x2264;
@@ -11470,7 +11470,7 @@
     t['paragraph'] = 0x00B6;
     t['parallel'] = 0x2225;
     t['parenleft'] = 0x0028;
-    t['parenleftaltonearabic'] = 0xFD3E;
+    t['parenleLTAltonearabic'] = 0xFD3E;
     t['parenleftbt'] = 0xF8ED;
     t['parenleftex'] = 0xF8EC;
     t['parenleftinferior'] = 0x208D;
@@ -11764,7 +11764,7 @@
     t['ringbelowcmb'] = 0x0325;
     t['ringcmb'] = 0x030A;
     t['ringhalfleft'] = 0x02BF;
-    t['ringhalfleftarmenian'] = 0x0559;
+    t['ringhalfleLTArmenian'] = 0x0559;
     t['ringhalfleftbelowcmb'] = 0x031C;
     t['ringhalfleftcentered'] = 0x02D3;
     t['ringhalfright'] = 0x02BE;
@@ -33717,7 +33717,7 @@
       gsubrs: cff.globalSubrIndex && cff.globalSubrIndex.objects
      };
     }
-    function parseGlyfTable(glyf, loca, isGlyphLocationsLong) {
+    function parseGlyLTAble(glyf, loca, isGlyphLocationsLong) {
      var itemSize, itemDecode;
      if (isGlyphLocationsLong) {
       itemSize = 4;
@@ -34412,7 +34412,7 @@
         0,
         0
        ];
-       return new TrueTypeCompiled(parseGlyfTable(glyf, loca, indexToLocFormat), cmap, fontMatrix);
+       return new TrueTypeCompiled(parseGlyLTAble(glyf, loca, indexToLocFormat), cmap, fontMatrix);
       }
       return new Type2Compiled(cff, cmap, font.fontMatrix, font.glyphNameMap);
      }
@@ -43358,7 +43358,7 @@
        error('Invalid root reference');
       }
      },
-     processXRefTable: function XRef_processXRefTable(parser) {
+     processXReLTAble: function XRef_processXReLTAble(parser) {
       if (!('tableState' in this)) {
        this.tableState = {
         entryNum: 0,
@@ -43367,7 +43367,7 @@
         parserBuf2: parser.buf2
        };
       }
-      var obj = this.readXRefTable(parser);
+      var obj = this.readXReLTAble(parser);
       if (!isCmd(obj, 'trailer')) {
        error('Invalid XRef table: could not find trailer dictionary');
       }
@@ -43381,7 +43381,7 @@
       delete this.tableState;
       return dict;
      },
-     readXRefTable: function XRef_readXRefTable(parser) {
+     readXReLTAble: function XRef_readXReLTAble(parser) {
       var stream = parser.lexer.stream;
       var tableState = this.tableState;
       stream.pos = tableState.streamPos;
@@ -43621,8 +43621,8 @@
         }
         var contentLength = skipUntil(buffer, position, endobjBytes) + 7;
         var content = buffer.subarray(position, position + contentLength);
-        var xrefTagOffset = skipUntil(content, 0, xrefBytes);
-        if (xrefTagOffset < contentLength && content[xrefTagOffset + 5] < 64) {
+        var xreLTAgOffset = skipUntil(content, 0, xrefBytes);
+        if (xreLTAgOffset < contentLength && content[xreLTAgOffset + 5] < 64) {
          xrefStms.push(position - stream.start);
          this.xrefstms[position - stream.start] = 1;
         }
@@ -43670,7 +43670,7 @@
         var obj = parser.getObj();
         var dict;
         if (isCmd(obj, 'xref')) {
-         dict = this.processXRefTable(parser);
+         dict = this.processXReLTAble(parser);
          if (!this.topDict) {
           this.topDict = dict;
          }

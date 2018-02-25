@@ -17,12 +17,12 @@
     </div>*@
 
 
-<div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar"   style="width:83%;">
+<div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar" style="width:83%;">
     <h4>      Manage Strategy Type     </h4>
     <div class="row">
         <div ng-controller="StrategytypeMasterController" class="nav-tabs-custom">
             <div ng-include="'Main/ConfirmModal'"></div>
-            <div class="row pull-right"  style="margin-right:14%;">
+            <div class="row pull-right" style="margin-right:14%;">
                 <button ng-show="!showAddwindow" data-ng-click="Showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
             </div>
             <div ng-show="showAddwindow" class="sec-one">
@@ -30,8 +30,12 @@
 
                     <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
                         <div class="col-md-6 form-group" style="position: static;">
-                            <label for="input-text-1">Strategytype </label>
-                            <input type="number" class="form-control" id="input-id-1" placeholder="Strategytype " ng-model=StrategytypeMaster.Strategytype>
+                            <label for="input-text-1">Strategy Type </label>
+                            <input type="text" class="form-control" id="input-id-1" placeholder="Strategy Type " ng-model=StrategytypeMaster.Strategytype>
+                        </div>
+                        <div class="col-md-6 form-group" style="position: static;">
+                            <label for="input-text-1">Strategy Type Code </label>
+                            <input type="number" class="form-control" id="input-id-1" placeholder="Strategy Type Code" ng-model=StrategytypeMaster.Strategytypecode>
                         </div>
 
                         <button data-ng-show="editMode" data-ng-click="UpdateStrategytypeMaster(StrategytypeMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>

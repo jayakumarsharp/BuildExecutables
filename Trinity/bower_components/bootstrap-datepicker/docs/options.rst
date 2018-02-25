@@ -427,7 +427,7 @@ Object. Default:
 ::
 
     {
-        leftArrow: '&laquo;',
+        leLTArrow: '&laquo;',
         rightArrow: '&raquo;'
     }
 
@@ -437,7 +437,7 @@ You can use this property to use custom icons libs. for example:
 ::
 
     {
-        leftArrow: '<i class="fa fa-long-arrow-left"></i>',
+        leLTArrow: '<i class="fa fa-long-arrow-left"></i>',
         rightArrow: '<i class="fa fa-long-arrow-right"></i>'
     }
 

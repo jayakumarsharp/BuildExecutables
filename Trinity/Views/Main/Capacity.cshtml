@@ -31,9 +31,12 @@
                     <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
                         <div class="col-md-6 form-group" style="position: static;">
                             <label for="input-text-1">Capacity </label>
-                            <input type="number" class="form-control" placeholder="Capacity " ng-model=CapacityMaster.Capacity>
+                            <input type="text" class="form-control" placeholder="Capacity " ng-model=CapacityMaster.Capacity>
                         </div>
-
+                        <div class="col-md-6 form-group" style="position: static;">
+                            <label for="input-text-1">Capacity Code </label>
+                            <input type="number" class="form-control" id="input-id-1" placeholder="Capacity Code" ng-model=CapacityMaster.Capacitycode>
+                        </div>
                         <button data-ng-show="editMode" data-ng-click="UpdateCapacityMaster(CapacityMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
                         <button data-ng-show="!editMode" data-ng-click="add(CapacityMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
                         <button data-ng-click="Confirmcancel()" class="col-md-2 btn btn-primary cancel">Cancel </button>

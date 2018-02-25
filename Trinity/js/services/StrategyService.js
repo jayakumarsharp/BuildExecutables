@@ -112,8 +112,8 @@ ReportApp.service('apiService', function ($http) {
         var response = $http.get(URl + 'GetAllProductType?ProductTypeId=');
         return response;
     };
-    this.GetAllFTAApplicationCode = function () {
-        var response = $http.get(URl + 'GetAllFTAApplicationCode?FTAApplicationCodeId=');
+    this.GetAllLTAApplicationCode = function () {
+        var response = $http.get(URl + 'GetAllLTAApplicationCode?LTAApplicationCodeId=');
         return response;
     };
     this.GetAllThirdPartyAppList = function () {
@@ -124,8 +124,8 @@ ReportApp.service('apiService', function ($http) {
         var response = $http.get(URl + 'GetAllBusiness?BusinessId=');
         return response;
     };
-    this.GetAllFTAStrategyCode = function () {
-        var response = $http.get(URl + 'GetAllFTAStrategyCode?FTAStrategyCodeId=');
+    this.GetAllLTAStrategyCode = function () {
+        var response = $http.get(URl + 'GetAllLTAStrategyCode?LTAStrategyCodeId=');
         return response;
     };
     this.GetAllDiscretionaryCode = function () {
@@ -153,12 +153,12 @@ ReportApp.service('apiService', function ($http) {
         var response = $http.get(URl + 'GetAllApplicationCategory?ApplicationCategoryId=');
         return response;
     };
-    this.GetAllFTAApplicationName = function () {
-        var response = $http.get(URl + 'GetAllFTAApplicationName?FTAApplicationNameId=');
+    this.GetAllLTAApplicationName = function () {
+        var response = $http.get(URl + 'GetAllLTAApplicationName?LTAApplicationNameId=');
         return response;
     };
-    this.GetAllFTAStrategyName = function () {
-        var response = $http.get(URl + 'GetAllFTAStrategyName?FTAStrategyNameId=');
+    this.GetAllLTAStrategyName = function () {
+        var response = $http.get(URl + 'GetAllLTAStrategyName?LTAStrategyNameId=');
         return response;
     };
     this.GetAllVenuetype = function () {

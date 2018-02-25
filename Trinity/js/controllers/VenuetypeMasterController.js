@@ -5,7 +5,8 @@
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('Venuetype').withTitle('Venuetype'),
+        DTColumnBuilder.newColumn('Venuetype').withTitle('Venue Type'),
+        DTColumnBuilder.newColumn('Venuetypecode').withTitle('Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -39,7 +40,7 @@
 
     $scope.add = function (VenuetypeMaster) {
         if (VenuetypeMaster != null) {
-            if (VenuetypeMaster.Venuetype.trim() != "") {
+            if (VenuetypeMaster.Venuetype && VenuetypeMaster.Venuetypecode) {
                 ApiCall.MakeApiCall("AddVenuetype", 'POST', VenuetypeMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
@@ -49,18 +50,18 @@
                         $scope.editMode = false;
 
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'Venuetype added successfully', null);
+                        toaster.pop('success', "Success", 'Venue Type added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding Venuetype ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding Venue Type ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Venuetype', null);
+                toaster.pop('warning', "Warning", 'Please enter Venue Type and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Venuetype', null);
+            toaster.pop('warning', "Warning", 'Please enter Venue Type and code', null);
         }
 
     };
@@ -71,7 +72,7 @@
             $scope.showAddwindow = true;
             $scope.VenuetypeMaster = data[0];
         }).error(function (data) {
-            $scope.error = "An Error has occured while Adding Venuetype! " + data.ExceptionMessage;
+            $scope.error = "An Error has occured while Adding Venue Type! " + data.ExceptionMessage;
         });
     };
 
@@ -83,7 +84,7 @@
             $scope.GetAllVenuetypeMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'Venuetype deleted successfully', null);
+            toaster.pop('success', "Success", 'Venue Type deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -95,23 +96,23 @@
 
     $scope.UpdateVenuetypeMaster = function (model) {
         if (model != null) {
-            if (model.Venuetype.trim() != "") {
+            if (model.Venuetype && model.Venuetypecode) {
                 ApiCall.MakeApiCall("ModifyVenuetype", 'POST', model).success(function (data) {
                     $scope.editMode = false;
                     $scope.VenuetypeMaster = null;
                     $scope.GetAllVenuetypeMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'VenuetypeMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'Venue Type updated successfully', null);
                 }).error(function (data) {
                     $scope.error = "An Error has occured while Adding VenuetypeMaster! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Venuetype', null);
+                toaster.pop('warning', "Warning", 'Please enter Venue Type and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Venuetype', null);
+            toaster.pop('warning', "Warning", 'Please enter Venue Type and code', null);
         }
     };
 

@@ -5,7 +5,8 @@
         .withPaginationType('full_numbers').withOption('createdRow', createdRow);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('Id').withTitle('ID').notVisible(),
-        DTColumnBuilder.newColumn('Strategytype').withTitle('Strategytype'),
+        DTColumnBuilder.newColumn('Strategytype').withTitle('Strategy Type'),
+        DTColumnBuilder.newColumn('Strategytypecode').withTitle('Code'),
         DTColumnBuilder.newColumn('Id').withTitle('Actions').notSortable()
             .renderWith(actionsHtml)
     ];
@@ -40,7 +41,7 @@
 
     $scope.add = function (StrategytypeMaster) {
         if (StrategytypeMaster != null) {
-            if (StrategytypeMaster.Strategytype.trim() != "") {
+            if (StrategytypeMaster.Strategytype && StrategytypeMaster.Strategytypecode) {
                 ApiCall.MakeApiCall("AddStrategytype", 'POST', StrategytypeMaster).success(function (data) {
                     if (data.Error != undefined) {
                         toaster.pop('error', "Error", data.Error, null);
@@ -48,20 +49,19 @@
                         $scope.StrategytypeMaster = null;
                         $scope.GetAllStrategytypeMaster();
                         $scope.editMode = false;
-
                         $scope.showAddwindow = false;
-                        toaster.pop('success', "Success", 'Strategytype added successfully', null);
+                        toaster.pop('success', "Success", 'Strategy Type added successfully', null);
                     }
                 }).error(function (data) {
-                    $scope.error = "An Error has occured while Adding Strategytype ! " + data.ExceptionMessage;
+                    $scope.error = "An Error has occured while Adding Strategy Type ! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Strategytype', null);
+                toaster.pop('warning', "Warning", 'Please enter Strategy Type and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Strategytype', null);
+            toaster.pop('warning', "Warning", 'Please enter Strategy Type', null);
         }
 
     };
@@ -84,7 +84,7 @@
             $scope.GetAllStrategytypeMaster();
             $('#confirmModal').modal('hide');
             $scope.showAddwindow = false;
-            toaster.pop('success', "Success", 'Strategytype deleted successfully', null);
+            toaster.pop('success', "Success", 'Strategy Type deleted successfully', null);
         }).error(function (data) {
             $scope.error = "An Error has occured while deleting user! " + data.ExceptionMessage;
         });
@@ -96,23 +96,23 @@
 
     $scope.UpdateStrategytypeMaster = function (model) {
         if (model != null) {
-            if (model.Strategytype.trim() != "") {
+            if (model.Strategytype && model.Strategytypecode) {
                 ApiCall.MakeApiCall("ModifyStrategytype", 'POST', model).success(function (data) {
                     $scope.editMode = false;
                     $scope.StrategytypeMaster = null;
                     $scope.GetAllStrategytypeMaster();
                     $scope.showAddwindow = false;
-                    toaster.pop('success', "Success", 'StrategytypeMaster updated successfully', null);
+                    toaster.pop('success', "Success", 'Strategy Type updated successfully', null);
                 }).error(function (data) {
                     $scope.error = "An Error has occured while Adding StrategytypeMaster! " + data.ExceptionMessage;
                 });
             }
             else {
-                toaster.pop('warning', "Warning", 'Please enter Strategytype', null);
+                toaster.pop('warning', "Warning", 'Please enter Strategy Type and code', null);
             }
         }
         else {
-            toaster.pop('warning', "Warning", 'Please enter Strategytype', null);
+            toaster.pop('warning', "Warning", 'Please enter Strategy Type', null);
         }
     };
 

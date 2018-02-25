@@ -18,7 +18,7 @@
 
 
 <div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar"  style="width:83%;">
-    <h4>      Manage ChildID    </h4>
+    <h4>      Manage Child ID    </h4>
     <div class="row">
         <div ng-controller="ChildIDMasterController" class="nav-tabs-custom">
             <div ng-include="'Main/ConfirmModal'"></div>
@@ -30,8 +30,8 @@
 
                     <div class="btns-b" ng-class="{'has-error':inputTask.$invalid && !inputTask.$pristine }">
                         <div class="col-md-6 form-group" style="position: static;">
-                            <label for="input-text-1">ChildID </label>
-                            <input type="text" class="form-control" id="input-id-1" placeholder="ChildID " ng-model=ChildIDMaster.ChildID>
+                            <label for="input-text-1">Child ID </label>
+                            <input type="text" class="form-control" id="input-id-1" placeholder="Child ID" ng-model=ChildIDMaster.ChildID>
                         </div>
 
                         <button data-ng-show="editMode" data-ng-click="UpdateChildIDMaster(ChildIDMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
