@@ -1,0 +1,82 @@
+﻿
+<div class="col-lg-8 col-md-6 main-content full-width basic-page sidebar" style="width:83%;">
+    <h4>      Manage LTA Application Mapping </h4>
+    <div class="row">
+        <div ng-controller="LTAApplicationMappingController" class="nav-tabs-custom">
+            <div ng-include="'Main/ConfirmModal'"></div>
+            <div class="row pull-right">
+                <button ng-show="!showAddwindow" data-ng-click="Showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+            </div>
+            <div ng-show="showAddwindow" class="sec-one">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>LTA Application</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationName" ng-options="item.LTAApplicationName for item in LTAApplicationNameList" title="Select LTAApplication" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select LTA Application Name-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>LTA Application Code</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationCode" ng-options="item.LTAApplicationCode for item in LTAApplicationCodeList" title="Select LTAApplication Code" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select LTA Application Code-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Child ID </label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select LTA Application Suffix-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Third Party Application</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select LTAApplicationSuffix" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select Third Party Application-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Parent ID</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ParentID" ng-options="item.ParentID for item in ParentIDList" title="Select ParentID" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select Parent ID-</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Application Owner</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.LTAApplicationOwner" ng-options="item.userId for item in LTAApplicationOwnerList" title="Select LTAApplicationOwner" style="width:100%;font-size: 0.8em" required>
+                            <option value="">-Select LTA Application Owner-</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Application Category</label>
+                        <select class="form-control" name="ddlSBU" ng-model="selectModel.ApplicationCategory" ng-options="item.ApplicationCategory for item in ApplicationCategoryList" title="Select Application Category" style="width:100%;font-size: 0.8em" required>
+                            <option value="">- Select Application Category -</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row col-md-12">
+                    <button data-ng-show="editMode" data-ng-click="UpdateLTAApplicationMaster(LTAApplicationMaster)" class="col-md-2 col-md-offset-1 btn btn-primary">Update</button>
+                    <button data-ng-show="!editMode" data-ng-click="add(selectModel)" class="col-md-2 col-md-offset-1 btn btn-primary">Add </button>
+                    <button data-ng-click="Confirmcancel()" class="col-md-2 btn btn-primary cancel">Cancel </button>
+
+
+                </div>
+            </div>
+
+            <div ng-show="!showAddwindow" class="col-md-12 data-table">
+
+                <div class="row">
+
+                    <table class="table table-responsive" datatable="" dt-options="dtOptions" dt-columns="dtColumns"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

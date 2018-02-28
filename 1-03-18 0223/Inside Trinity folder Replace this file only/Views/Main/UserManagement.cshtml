@@ -1,0 +1,331 @@
+﻿<div class="col-lg-10 col-md-9 main-content basic-page sidebar" style="width:83%;">
+    <div ng-controller="UserController" class="nav-tabs-custom">
+        <div class="box-header with-border">
+            <h4> User Management   </h4>
+        </div>
+
+        <div class="row pull-right" style="margin-bottom:10px;">
+            @*<button ng-show="!IsReadOnly" data-ng-click="showadd()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>*@
+            <button ng-show="!IsReadOnly" data-ng-click="showtempadd()" class="btn btn-primary">Manual User<i class="fa fa-plus"></i></button>
+        </div>
+
+        <section class="content">
+            <table datatable="" dt-options="dtOptions1" dt-columns="dtColumns1" class="table table-responsive"></table>
+        </section>
+        @*<div class="modal fade" id="userModel" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" style="width:60%;height:400px">
+                    <div class="modal-content">
+                        <div class="modal-header" style="margin-bottom:0px;">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                            <h5 class="modal-title" id="myModalLabel" ng-hide="editMode">Add User</h5>
+                            <h5 class="modal-title" id="myModalLabel" ng-show="editMode">Edit User</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form novalidate class="form-horizontal" role="form" name="adduserform">
+                                <div class="form-group">
+                                    <div style="margin-left:10px;">
+                                        <input name="chkShowSelected" type="checkbox" ng-change="showSelectedUsers(user.showSelected)" ng-model="user.showSelected" style="font-size: 7px" class="mnbxcont">&nbsp;<label style="font-size: 12px;font: 10pt Calibri, Arial, Verdana, sans-serif">Show Selected Users</label></input>
+                                    </div>
+                                </div>
+
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row ">
+                                            <div class="col-md-12 data-table">
+                                                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-responsive" style="width: 100%!important;"></table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <select class="form-control" name="ddlRole" ng-model="user.selectedRole" ng-options="item.RoleName for item in Roles" title="Select Role" style="width:100%;font-size: 0.8em" required>
+                                                <option value="">- Select Role -</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-xs-4">
+                                            <select class="form-control" name="ddlLocation" ng-model="user.selectedBusinessSector" ng-options="item.BusinessLine for item in BusinessLineList" title="Select Country" style="width:100%;font-size: 0.8em" required>
+                                                <option value="">- Select Business Sector -</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-top:10px;">
+                                        <div class="col-xs-4">
+                                            <select class="form-control" name="ddlSBU" ng-model="user.selectedRegion" ng-options="item.RegionName for item in RegionMasterList" title="Select Region" style="width:100%;font-size: 0.8em" required>
+                                                <option value="">- Select User Region -</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-xs-4">
+                                            <select class="form-control" name="ddlSBU" ng-model="user.selectedCountry" ng-options="item.CountryName for item in CountryMasterList" title="Select Division" style="width:100%;font-size: 0.8em" required>
+                                                <option value="">- Select Country -</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="pull-right">
+                                <span data-ng-hide="editMode">
+                                    <input name="UserAdd" ng-disabled="adduserform.$invalid" type="submit" value="Add Users"
+                                           data-ng-click="getSelected(user.selectedRole,user.selectedRegion,user.selectedCountry,user.selectedBusinessSector)" class="btn btn-primary" />
+                                </span>
+                                <input name="UserCancel" type="button" value="Cancel" data-ng-click="cancel()" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:40%">
+
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom:0px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">View User</h4>
+                    </div>
+                    <div class="" style="overflow-y:auto">
+                        <div class="box-comments">
+                            <form class="form-horizontal" role="form" name="viewuser">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-sm-5 control-label">Name</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{User.UserName}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Address" class="col-sm-5 control-label">Email ID</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{User.EmailId}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Role" class="col-sm-5 control-label">Region</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{ViewData.region}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Role" class="col-sm-5 control-label">Status</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{User.Status}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Role" class="col-sm-5 control-label">Role</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{User.RoleName}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Status" class="col-sm-5 control-label">Business Sector</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{ViewData.businessmapping}}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label">Country</label>
+                                        <div class="col-sm-7" style="margin-top:6px">
+                                            {{ViewData.country}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" name="closeUserView" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:60%">
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom:0px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+                    </div>
+                    <div class="box-comments">
+                        <div class="">
+                            <form class="form-horizontal" role="form" name="edituser">
+
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-4 control-label">Name</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        {{user.UserName}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EmailId" class="col-sm-4 control-label">Email Id</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        {{user.EmailId}}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="RoleID" class="col-sm-4 control-label">Role</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <select class="form-control" ng-model="user.RoleId" ng-options="item.id as item.RoleName for item in Roles" title="Select Role" required>
+                                            <option value="">- Select Role - </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="SBU" class="col-sm-4 control-label">Business Line</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <multiselect placeholder="Select Business sector..." ms-config="multiselectBusinessSector.config"
+                                                     ms-options="multiselectBusinessSector.options" ms-model="multiselectBusinessSector.selected">
+                                        </multiselect>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="TypeID" class="col-sm-4 control-label">Region</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <multiselect placeholder="Select Region..." ms-config="multiselectRegion.config"
+                                                     ms-options="multiselectRegion.options" ms-model="multiselectRegion.selected">
+                                        </multiselect>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="TypeID" class="col-sm-4 control-label">Country</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <multiselect placeholder="Select country..." ms-config="multiselectCountry.config"
+                                                     ms-options="multiselectCountry.options" ms-model="multiselectCountry.selected">
+                                        </multiselect>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="Status" class="col-sm-4 control-label">Status</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <select name="ddlEditStatus" class="form-control" ng-model="user.Status" title="Select Status" required>
+                                            <option value="">- Select Status -</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer" style="margin-top:0px;">
+                                <input name="modifyUser" type="submit" value="Update" data-ng-click="ModifyUser(user)" class="btn btn-primary" ng-disabled="edituser.$invalid || multiselectCountry.selected.length<=0 ||multiselectRegion.selected.length<=0 ||multiselectBusinessSector.selected.length<=0 " />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="userCreateModel" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="width:50%">
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom:0px;padding:2px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Create User</h4>
+                    </div>
+                    <div class="box-comments">
+                        <div class="">
+                            <form class="form-horizontal" role="form" name="createUserForm">
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-4 control-label">UserID</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <input ng-model="user.userId" class="form-control" maxlength="25" placeholder="Enter user id" required /><label style="color:red">{{InvalidMessage}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-4 control-label">User Name</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <input ng-model="user.UserName" class="form-control" maxlength="25" placeholder="Enter user name" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="EmailID" class="col-sm-4 control-label">Email</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <input type="email" class="form-control" ng-model="user.emailId" maxlength="60" placeholder="Enter email id" name="emailId" required />
+                                    </div><span style="color:red" ng-show="createUserForm.emailId.$error.email">Invalid Email</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Password" class="col-sm-4 control-label">Password</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <input type="password" class="form-control" ng-model="user.password" maxlength="25" placeholder="Enter password" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="RoleID" class="col-sm-4 control-label">Role</label>
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <select class="form-control" ng-model="user.RoleId" ng-options="item.id as item.RoleName for item in Roles" title="Select Role" required>
+                                            <option value="">- Select Role - </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="SBU" class="col-sm-4 control-label">Business Sector</label>
+
+                                    <div class="col-sm-6" style="margin-top:6px">
+                                        <multiselect placeholder="Select Business sector..." ms-model="multiselectBusinessSector.selected" ms-config="multiselectBusinessSector.config"
+                                                     ms-options="multiselectBusinessSector.options">
+                                        </multiselect>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="TypeID" class="col-sm-4 control-label">Region</label>
+                                    <div class="col-sm-8" style="margin-top:6px">
+
+                                        <multiselect placeholder="Select Region..." ms-model="multiselectRegion.selected" ms-config="multiselectRegion.config"
+                                                     ms-options="multiselectRegion.options">
+                                        </multiselect>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="TypeID" class="col-sm-4 control-label">Country</label>
+                                    <div class="col-sm-8" style="margin-top:6px">
+
+                                        <multiselect placeholder="Select country..." ms-model="multiselectCountry.selected" ms-config="multiselectCountry.config"
+                                                     ms-options="multiselectCountry.options">
+                                        </multiselect>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0px;">
+                        <input type="submit" value="Create" data-ng-click="CreateTempUser(user)" class="btn btn-primary" ng-disabled="createUserForm.$invalid || multiselectCountry.selected.length<=0 ||multiselectRegion.selected.length<=0 ||multiselectBusinessSector.selected.length<=0 " />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loader " class="animationload hide ">
+            <div class="loader ">
+                Loading...
+            </div>
+        </div>
+
+    </div>
+</div>

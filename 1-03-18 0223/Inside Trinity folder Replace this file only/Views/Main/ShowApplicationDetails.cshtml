@@ -1,0 +1,352 @@
+﻿<div ng-show="pageList[0].Page">
+    <form novalidate role="form" name="addform">
+        @*First Box*@
+        <div class="col-md-4">
+            <div class="box-body">
+                <div class="form-group">
+                    <label>LTA Application Name </label>
+                    <select class="form-control" ng-model="selectModel.LTAApplicationName" ng-change="userfilter3()" ng-options="item.LTAApplicationName for item in LTAApplicationNameList" title="Select LTAApplicationName" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Name -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Third Party Application </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.ThirdPartyApp" ng-options="item.Value for item in ThirdPartyList" title="Select LTAApplicationSuffix" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Third Party Application-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>LTA Application Owner </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.LTAApplicationOwner" ng-options="item.userId for item in LTAApplicationOwnerList" title="Select LTAApplicationOwner" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Owner -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>LTA Strategy Name </label>
+                    <select class="form-control" name="ddlProduct" ng-model="selectModel.LTAStrategyName" ng-options="item.LTAStrategyName for item in LTAStrategyNameList" ng-change="userfilter4()" title="Select LTAStrategyName" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Name -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>LTA Short Code </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.LTAShortCode">
+
+                </div>
+                <div class="form-group">
+                    <label>Business Line </label>
+                    <select class="form-control" ng-model="selectModel.BusinessLine" ng-options="item.BusinessLine for item in BusinessLineList" ng-change="userfilter(false)" title="Select BusinessLine" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Business Line-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Venue type </label>
+                    <select class="form-control" ng-model="selectModel.Venuetype" ng-options="item.Venuetype for item in VenuetypeList" ng-change="userfilter2()" title="Select VenueType" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Venue Type-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Priority </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.Priority">
+                </div>
+                <div class="form-group">
+                    <label>Go-Live date </label>
+                    <div class="col-lg-12">
+                        <div class='input-group date' datetimepicker ng-model="selectModel.GOLiveDate" ng-change="changeGoLive(selectModel.GOLiveDate)">
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>System Flow &nbsp;<span ng-click="openpopup(true)" class="label label-success pull-right">{{UploadedSList.length}}</span></label>
+                    <input type="file" class="btn btn-sm btn-info btn-rounded" ngf-select ng-model="selectModel.Systemflowfile" multiple name="file" />
+                    @*<i ng-show="upload_form.file.$error.required">*required</i><br>
+                        <i ng-show="upload_form.file.$error.maxSize">
+                            File too large
+                            {{file.size / 1000000|number:1}}MB: max 20M
+                        </i>
+                        <p>{{progress}}</p>*@
+                </div>
+            </div>
+        </div>
+        @*First Box end*@
+        @*Second Box start*@
+        <div class="col-md-4">
+            <div class="box-body">
+                <div class="form-group">
+                    <label>LTA Application Code </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.LTAApplicationCode" ng-change="userfilter1()" ng-options="item.LTAApplicationCode for item in LTAApplicationCodeList" title="Select LTAApplicationCode" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Application Code -</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Parent ID </label>
+
+                    <select class="form-control disabledinput" ng-model="selectModel.ParentID" ng-options="item.ParentID for item in ParentIDList" disabled title="Select ParentID" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Parent ID-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Asset Class </label>
+                    <select class="form-control" ng-model="selectModel.Business" ng-options="item.Business for item in BusinessList" ng-change="userfilter5()" title="Select Asset Class" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Asset Class -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>LTA Strategy Code </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.LTAStrategyCode" ng-change="userfilter1()" ng-options="item.LTAStrategyCode for item in LTAStrategyCodeList" title="Select LTAStrategyCode" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Code -</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>LTA Long Code</label>
+                    <input type="text" class="form-control" maxlength="1500" placeholder="Enter LTA Long Code" ng-model="selectModel.LTALongCode">
+                </div>
+
+                <div class="form-group">
+                    <label>LTA Strategy Owner </label>
+                    <select class="form-control" ng-model="selectModel.LTAStrategyOwner" ng-options="item.userId for item in LTAStrategyOwnerList" title="Select LTAApplicationOwner" ng-change="checksignoff()" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select LTA Strategy Owner -</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Capacity </label>
+                    <select class="form-control" name="ddlCapacity" ng-model="selectModel.Capacity" ng-options="item.Capacity for item in CapacityList" ng-change="userfilter2()" title="Select Capacity" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Capacity -</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Priority Score </label>
+                    <input type="text" class="form-control" maxlength="100" readonly ng-model="selectModel.PriorityScore">
+                </div>
+
+                <div class="form-group">
+                    <label>Decommissioned Date</label>
+                    <div class="col-lg-12">
+                        <div class='input-group date' datetimepicker ng-model="selectModel.DecomissionedDate" ng-change="changeDecommisiondate(selectModel.DecomissionedDate)">
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Decommissioned Evidence &nbsp;<span ng-click="openpopup(false)" class="label label-success pull-right">{{UploadedDList.length}}</span></label>
+                    <input type="file" class="btn btn-sm btn-info btn-rounded" ngf-select ng-model="selectModel.Decommissionedfile" multiple name="file" />
+                    @*<i ng-show="upload_form.file.$error.required">*required</i><br>
+                        <i ng-show="upload_form.file.$error.maxSize">
+                            File too large
+                            {{file.size / 1000000|number:1}}MB: max 20M
+                        </i>
+                        <p>{{progress}}</p>*@
+                </div>
+            </div>
+        </div>
+        @*Second Box end*@
+
+        @*3rd Box start*@
+        <div class="col-md-4">
+            <div class="box-body">
+                <div class="form-group">
+                    <label>Child ID </label>
+                    <select class="form-control disabledinput" name="ddlApp" ng-model="selectModel.ChildID" ng-options="item.ChildID for item in ChildIDList" title="Select ChildID" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Child ID -</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label>Application Category </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.ApplicationCategory" ng-options="item.ApplicationCategory for item in ApplicationCategoryList" title="Select Application Category" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Application Category -</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Asset Class Suffix </label>
+                    <select class="form-control disabledinput" ng-model="selectModel.BusinessSuffix" ng-change="userfilter1()" ng-options="item.BusinessSuffix for item in BusinessSuffixList" title="Select Asset Class Suffix" disabled style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Asset Class Suffix-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Discretionary Code </label>
+                    <select class="form-control" ng-model="selectModel.DiscretionaryCode" ng-change="userfilter1()" ng-options="item.DiscretionaryCode for item in DiscretionaryCodeList" title="Select DiscretionaryCode" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Discretionary Code-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Region </label>
+                    <select class="form-control" ng-model="selectModel.Region" ng-change="userfilter(false)" ng-options="item.RegionName for item in RegionMasterList" title="Select Region" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Region -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Senior Management Function</label>
+                    <input type="text" class="form-control" maxlength="1500" placeholder="Enter Senior Management Function" ng-model="selectModel.SeniorManagementFunction">
+                </div>
+                <div class="form-group">
+                    <label>Strategy type </label>
+                    <select class="form-control" ng-model="selectModel.Strategytype" ng-options="item.Strategytype for item in StrategytypeList" ng-change="userfilter2()" title="Select Strategy Type" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Strategy Type -</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status </label>
+                    <select class="form-control" ng-model="selectModel.Status" ng-options="item.StatusName for item in StrategyStatusType" title="Select Status" style="width:100%;font-size: 0.8em" required>
+                        <option value="">- Select Status-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Country </label>
+                    <multiselect placeholder="Select country..." ms-model="multiselect.selected" ms-config="multiselect.config" ms-change="assignUsers()"
+                                 ms-options="multiselect.options">
+                    </multiselect>
+                </div>
+                @*LTA Owner Attestation*@
+            </div>
+        </div>
+        @*3rd Box end*@
+    </form>
+    <div class="form-group col-lg-12">
+        <div class="col-sm-offset-2 col-sm-10">
+            <span>
+                <input type="button" value="Next" ng-disabled="addform.$invalid || multiselect.selected.length<=0" ng-click="activateTab(1)" class="btn btn-primary" />
+            </span>&nbsp;
+            <input type="button" value="Cancel" ng-click="Confirmcancel()" class="btn btn-primary cancel" />
+        </div>
+    </div>
+</div>
+<div ng-show="pageList[1].Page">
+    <form novalidate role="form" name="form2">
+
+        <div class="col-md-12">
+            <div class="box-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="5" id="comment" ng-model="selectModel.Description" placeholder="Enter the description"></textarea>
+                </div>
+
+            </div>
+            @*<div class="checkbox" ng-if="ShowSignOff">
+                        <label>
+                            <input type="checkbox" value="" ng-model="selectModel.SignOff">
+                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                            SIGN OFF
+                        </label>
+                    </div><div class="checkbox" ng-if="ShowSignOff">
+                    <label>
+                        <input type="checkbox" value="" ng-model="selectModel.SignOff">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    </label>
+                </div>*@
+
+            <div class="col-sm-12 col-sm-offset-3" style="margin-top:6px;margin-bottom:10px;" ng-show="ApprovalCheck.ShowSignOff || ApprovalCheck.IsApprove">
+                <label class="mt-checkbox mt-checkbox-outline col-sm-2"></label>
+                <div class="btn-group">
+                    <span>
+                        <button type="button" ng-click="setsignoff()" class="btn" ng-class="{'btn-success': selectModel.Attest== 'True' }">Attest</button>
+                    </span>&nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-group col-lg-12">
+        <div class="col-sm-offset-2 col-sm-10">
+            <span>
+                <input type="button" value="Prev" ng-click="activateTab(0)" class="btn btn-primary" />
+            </span>&nbsp;
+
+            <span ng-show="!editMode">
+                <input type="button" value="Save" ng-disabled="adduserform.$invalid" ng-click="InsertStrategy(currency)" class="btn btn-primary" />
+            </span>&nbsp;
+            <span ng-show="editMode">
+                <input type="button" value="Update" ng-click="UpdateStrategy(currency)" class="btn btn-primary" />
+            </span>&nbsp;
+
+            <input type="button" value="Cancel" ng-click="Confirmcancel()" class="btn btn-primary cancel" />
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="viewFiles" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content">
+            <div class="modal-header content-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title text-center" id="myModalLabel">Uploaded Files</h4>
+            </div>
+            <div class="row" ng-show="Issystemflow">
+                <div style="padding:30px">
+
+                    <div ng-if="UploadedSList.length>0 ">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>FileName</th>
+                                    <th>Uploaded User</th>
+                                    <th>Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in UploadedSList">
+                                    <td>{{data.Version}}</td>
+                                    <td>
+                                        {{data.Approver}}
+                                    </td>
+                                    <td>
+                                        {{data.Uploadedby}}
+                                    </td>
+                                    <td><a ng-click="DownlaodFile(data.Comments,data.RefNumber)">download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="!Issystemflow">
+                <div style="padding:30px">
+                    <div ng-if="UploadedDList.length>0">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>FileName</th>
+                                    <th>Uploaded User</th>
+                                    <th>Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in UploadedDList">
+                                    <td>{{data.Version}}</td>
+                                    <td>
+                                        {{data.Approver}}
+                                    </td>
+                                    <td>
+                                        {{data.Uploadedby}}
+                                    </td>
+                                    <td><a ng-click="DownlaodFile(data.Comments,data.RefNumber)">download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

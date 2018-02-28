@@ -1,0 +1,74 @@
+﻿<!-- BEGIN PAGE BREADCRUMBS -->
+<div ng-controller="StrategyController">
+    <div ng-include="'Main/ConfirmModal'"></div>
+    <div class="col-lg-12 col-md-12  main-content basic-page sidebar" style="width:80%;padding:1px!important;" ng-show="!showaction">
+        <h4> LTA Strategy Inventory Management   </h4>
+
+        <div class="row pull-right" ng-if="Permissions.IsWrite || ApprovalCheck.IsApprove">
+            <button data-ng-click="showadd()" class="btn btn-primary">Add LTA Strategy Inventory &nbsp;    <i class="fa fa-plus"></i></button>
+        </div>
+        <div class="col-lg-12 data-table">
+            <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-responsive"></table>
+        </div>
+    </div>
+    <div ng-show="showaction">
+        <div class="col-lg-8 col-md-6 main-content basic-page sidebar">
+            <h4 style="margin-bottom:1px !important;" ng-hide="editMode">Add Strategy </h4>
+            <h4 style="margin-bottom:1px !important;" ng-show="editMode">Edit Strategy</h4>
+            <div class="row">
+                <div class="box-body">
+                    <div class="row">
+                        <div ng-include="'Main/ShowApplicationDetails'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3 right-sidebar sidebar">
+            <ol>
+                <li ng-class="{'active-ol':pageList[0].IsValid,'done-act':pageList[1].IsValid}">
+                    <a ng-click="activateTab(0)">Basic Details</a>
+                </li>
+
+                <li ng-class="{'active-ol':pageList[1].IsValid,'done-act':pageList[2].IsValid}">
+                    <a ng-click="activateTab(1)">Additional DETAILS</a>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+    <div ng-include="'Main/ViewApprovals'"></div>
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #3c8dbc;color:white">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+                </div>
+                <div class="modal-body">
+                    "As the desk head for the listed Applications and Strategies, to the best of my knowledge, I attest that the information provided is complete and accurate"
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-ng-click="UpdateStrategy()">Ok</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .disabled {
+        cursor: not-allowed;
+    }
+
+    .basic-page .form-control {
+        height: 34px;
+        padding: 0px 9px;
+    }
+
+    table tr {
+        font-size: 14px;
+    }
+</style>
+
+
